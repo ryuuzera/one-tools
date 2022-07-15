@@ -1,0 +1,49 @@
+unit OneTools.DialogBox.View;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, OneTools.Forms.FormBase1.View,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TTipoDlg = (mtInformation, mtWarning, mtError);
+
+  TfrmBase2 = class(TfrmBase1)
+    lbTIPO: TLabel;
+    Panel2: TPanel;
+    Image1: TImage;
+    Panel3: TPanel;
+    lbMensagem: TLabel;
+    Panel4: TPanel;
+    Panel5: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor Create(AOwner: Tcomponent; AMensagem: String; ATipo: TTipoDlg; Botoes: TArray<String> = ''); reintroduce;
+  end;
+
+var
+  frmBase2: TfrmBase2;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmBase2 }
+
+constructor TfrmBase2.Create(AOwner: Tcomponent; AMensagem: String; ATipo: TTipoDlg;
+  Botoes: TArray<String> = '');
+begin
+  inherited Create(AOwner);
+  case ATipo of
+    mtInformation: lbTIPO.Caption := 'AVISO';
+    mtWarning:     lbTIPO.Caption := 'ATENÇÃO';
+    mtError:       lbTIPO.Caption := 'ERRO';
+  end;
+  lbMensagem.Caption := AMensagem;
+end;
+
+end.

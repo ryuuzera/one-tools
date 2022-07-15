@@ -1,0 +1,43 @@
+unit OneTools.Main.Model;
+
+interface
+
+uses
+  System.Classes, OneTools.Main.View, Vcl.ExtCtrls, DateUtils, SysUtils;
+
+type
+  TDataModule1 = class(TDataModule)
+    TimerSenha: TTimer;
+    procedure TimerSenhaTimer(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  DataModule1: TDataModule1;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+procedure TDataModule1.TimerSenhaTimer(Sender: TObject);
+var
+   SenhaDoDia,
+   iDia,
+   iMes,
+   iAno: Integer;
+begin
+   iDia := DayOf(Date);
+   iMes := MonthOf(Date);
+   iAno := YearOf(Date);
+
+   SenhaDoDia := (iDia + iMes + iAno) * iDia;
+
+   frmMain.lbSenha.Caption := Integer(SenhaDoDia).ToString;
+end;
+
+end.

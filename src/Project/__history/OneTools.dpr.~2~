@@ -1,0 +1,15 @@
+program OneTools;
+
+uses
+  Vcl.Forms,
+  OneTools.Main.View in '..\View\OneTools.Main.View.pas' {frmMain},
+  OneTools.Styles.Constants.View in '..\View\Styles\OneTools.Styles.Constants.View.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.
