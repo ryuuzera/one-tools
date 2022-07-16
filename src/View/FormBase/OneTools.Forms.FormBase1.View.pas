@@ -17,8 +17,10 @@ type
     pnMinimize: TPanel;
     imgMinimize: TImage;
     Panel1: TPanel;
-    procedure FormCreate(Sender: TObject);
+    PNEvents: TPanel;
     procedure imgCloseClick(Sender: TObject);
+    procedure PNEventsMouseEnter(Sender: TObject);
+    procedure PNEventsMouseLeave(Sender: TObject);
   private
    { Private declarations }
     function GetBorderSpace: Integer;
@@ -30,6 +32,7 @@ type
     procedure Resize; override;
   public
     { Public declarations }
+    constructor Create(AOwner: TComponent); reintroduce;
   end;
 
 var
@@ -44,14 +47,14 @@ uses
 
 { TfrmBase1 }
 
-procedure TfrmBase1.FormCreate(Sender: TObject);
-var
-   I: Integer;
+constructor TfrmBase1.Create(AOwner: TComponent);
 begin
-   for I := 0 to Pred(Self.ComponentCount) do
-   begin
-      if TForm(Self.Components[i]).Tag in [10, 20, 21, 22] then
-        TWinControl(Self.Components[i]).Cursor := crHandPoint;
+   inherited Create(AOwner);
+   with TMainController.Create do
+   try
+      OnCreate(Self);
+   finally
+      Free;
    end;
 end;
 
@@ -65,14 +68,14 @@ begin
       bsSizeable, bsSizeToolWin:
          Result := GetSystemMetrics(SM_CYSIZEFRAME) +
                    GetSystemMetrics(SM_CXPADDEDBORDER);
-     else
-      Result := 0;
+      else
+         Result := 0;
    end;
 end;
 
 procedure TfrmBase1.imgCloseClick(Sender: TObject);
 begin
-  Close;
+   Close;
 end;
 
 function TfrmBase1.IsBorderless: Boolean;
@@ -82,13 +85,23 @@ end;
 
 procedure TfrmBase1.Paint;
 begin
-  inherited;
-  if (WindowState = wsNormal) and (not IsBorderless) then
-  begin
-    Canvas.Pen.Color := clBlack;
-    Canvas.MoveTo(0, 0);
-    Canvas.LineTo(Width, 0);
-  end;
+   inherited;
+   if (WindowState = wsNormal) and (not IsBorderless) then
+   begin
+      Canvas.Pen.Color := clBlack;
+      Canvas.MoveTo(0, 0);
+      Canvas.LineTo(Width, 0);
+   end;
+end;
+
+procedure TfrmBase1.PNEventsMouseEnter(Sender: TObject);
+begin
+   SetMouseMove(Sender);
+end;
+
+procedure TfrmBase1.PNEventsMouseLeave(Sender: TObject);
+begin
+   SetMouseLeave(Sender);
 end;
 
 procedure TfrmBase1.Resize;
@@ -99,7 +112,7 @@ end;
 
 procedure TfrmBase1.WMNCCalcSize(var Msg: TWMNCCalcSize);
 var
-  CaptionBarHeight: Integer;
+   CaptionBarHeight: Integer;
 begin
    inherited;
    if BorderStyle = bsNone then

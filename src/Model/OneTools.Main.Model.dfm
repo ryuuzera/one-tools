@@ -13,4 +13,8 @@ object dmMain: TdmMain
     Left = 96
     Top = 16
   end
+  object JSONDocument: TJSONDocument
+    Left = 24
+    Top = 72
+  end
 end

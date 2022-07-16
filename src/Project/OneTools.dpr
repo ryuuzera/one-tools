@@ -13,7 +13,9 @@ uses
   OneTools.Forms.Controller in '..\Controller\OneTools.Forms.Controller.pas',
   OneTools.Forms.FormBase1.View in '..\View\FormBase\OneTools.Forms.FormBase1.View.pas' {frmBase1},
   OneTools.DialogBox.View in '..\View\OneTools.DialogBox.View.pas' {MessageBox},
-  OneTools.Privacy.Controller in '..\Controller\Private\OneTools.Privacy.Controller.pas';
+  OneTools.Privacy.Controller in '..\Controller\Private\OneTools.Privacy.Controller.pas',
+  JSONDoc in '..\View\JSONDoc.pas',
+  JSONTreeView in '..\View\JSONTreeView.pas';
 
 {$R *.res}
 

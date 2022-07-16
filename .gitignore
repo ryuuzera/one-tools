@@ -14,3 +14,5 @@ src/Controller/__history/OneTools.Forms.Controller.pas.~2~
 src/Controller/Private/OneTools.Privacy.Controller.pas
 *.dcu
 src/Project/Win32/Debug/OneTools.exe
+*.~23~
+*.~23~

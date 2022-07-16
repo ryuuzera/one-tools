@@ -6,7 +6,8 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Math, Vcl.ExtCtrls, Vcl.WinXCtrls, Vcl.StdCtrls,
   OneTools.Helpers.Panel.Controller, OneTools.Styles.Constants.View,
-  Vcl.Imaging.pngimage, Vcl.ComCtrls, ShellAPI, OneTools.DialogBox.View;
+  Vcl.Imaging.pngimage, Vcl.ComCtrls, ShellAPI, OneTools.DialogBox.View,
+  JSONTreeView, JSONDoc;
 
 type
   TfrmMain = class(TForm)
@@ -93,6 +94,23 @@ type
     Panel19: TPanel;
     reCriptografia: TRichEdit;
     pnDescriptografar: TPanel;
+    TabSheet5: TTabSheet;
+    Panel16: TPanel;
+    Panel20: TPanel;
+    Panel21: TPanel;
+    Panel22: TPanel;
+    Label12: TLabel;
+    pnJSONText: TPanel;
+    pnJSONVisualizacao: TPanel;
+    PC_JSON: TPageControl;
+    TabSheet6: TTabSheet;
+    TabSheet7: TTabSheet;
+    Panel25: TPanel;
+    reJSONView: TRichEdit;
+    Panel26: TPanel;
+    JSONTree: TJSONTreeView;
+    pnVisualizarJSON: TPanel;
+    Label13: TLabel;
     procedure pnTopMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
     procedure imgCloseClick(Sender: TObject);
@@ -113,6 +131,9 @@ type
     procedure pnConverterDebugClick(Sender: TObject);
     procedure pnCriptografarClick(Sender: TObject);
     procedure pnDescriptografarClick(Sender: TObject);
+    procedure pnJSONTextClick(Sender: TObject);
+    procedure pnVisualizarJSONClick(Sender: TObject);
+    procedure pnJSONVisualizacaoClick(Sender: TObject);
   private
      { Private declarations }
     function GetBorderSpace: Integer;
@@ -132,7 +153,7 @@ var
 implementation
 
 uses
-  OneTools.Main.Controller;
+  OneTools.Main.Controller, OneTools.Main.Model;
 
 {$R *.dfm}
 
@@ -219,17 +240,39 @@ end;
 procedure TfrmMain.Paint;
 begin
   inherited;
-  if (WindowState = wsNormal) and (not IsBorderless) then
-  begin
-    Canvas.Pen.Color := clBlack;
-    Canvas.MoveTo(0, 0);
-    Canvas.LineTo(Width, 0);
-  end;
+   if (WindowState = wsNormal) and (not IsBorderless) then
+   begin
+      Canvas.Pen.Color := clBlack;
+      Canvas.MoveTo(0, 0);
+      Canvas.LineTo(Width, 0);
+   end;
 end;
 
 procedure TfrmMain.Panel1Click(Sender: TObject);
 begin
    ControlaNav(Nav, Sender, PageControl1, 2);
+end;
+
+procedure TfrmMain.pnJSONTextClick(Sender: TObject);
+begin
+   PC_JSON.ActivePage := PC_JSON.Pages[1];
+   frmMain.pnJSONVisualizacao.BevelOuter := bvNone;
+   frmMain.pnJSONText.BevelOuter := bvLowered;
+end;
+
+procedure TfrmMain.pnJSONVisualizacaoClick(Sender: TObject);
+begin
+   dmMain.JSONDocument.JSONText := reJSONView.Text;
+   JSONTree.LoadJson;
+   PC_JSON.ActivePage := PC_JSON.Pages[0];
+   Self.Cursor := crDefault;
+   frmMain.pnJSONVisualizacao.BevelOuter := bvLowered;
+   frmMain.pnJSONText.BevelOuter := bvNone;
+end;
+
+procedure TfrmMain.pnVisualizarJSONClick(Sender: TObject);
+begin
+   ControlaNav(Nav, Sender, PageControl1, 4);
 end;
 
 procedure TfrmMain.pnConverterDebugClick(Sender: TObject);
@@ -286,10 +329,11 @@ end;
 procedure TfrmMain.pnGerarSQLDelphiClick(Sender: TObject);
 begin
   ValidarCampoVazio(String(edSQLDelphi.Text).IsEmpty, 'Insira o nome do componente SQL!', edSQLDelphi);
-  reSQLtoDelphi.Text := GeraSQLtoDelphi(edSQLDelphi.Text,
-                                          reSQLtoDelphi.Lines,
-                                            swGeraCreate.State,
-                                            swEliminaEspacos.State = tssOn);
+  GeraSQLtoDelphi(reSQLtoDelphi,
+                    edSQLDelphi.Text,
+                      reSQLtoDelphi.Lines,
+                        swGeraCreate.State,
+                          swEliminaEspacos.State = tssOn);
 end;
 
 procedure TfrmMain.pnIndentarClick(Sender: TObject);

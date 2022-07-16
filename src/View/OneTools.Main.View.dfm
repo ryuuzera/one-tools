@@ -12,6 +12,7 @@ object frmMain: TfrmMain
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  KeyPreview = True
   Padding.Left = 1
   Padding.Top = 1
   Padding.Right = 1
@@ -344,6 +345,38 @@ object frmMain: TfrmMain
                 OnClick = pnCriptoXMLClick
               end
             end
+            object pnVisualizarJSON: TPanel
+              Tag = 20
+              Left = 0
+              Top = 132
+              Width = 199
+              Height = 33
+              Align = alTop
+              BevelOuter = bvNone
+              Caption = 'pnSQLIdent'
+              Color = 2630180
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 4
+              OnClick = pnVisualizarJSONClick
+              ExplicitLeft = 7
+              ExplicitTop = 217
+              object Label13: TLabel
+                Tag = 20
+                Left = 26
+                Top = 5
+                Width = 108
+                Height = 17
+                Caption = 'Visualizador JSON'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = []
+                ParentFont = False
+                OnClick = pnVisualizarJSONClick
+              end
+            end
           end
         end
         object pnMenuBottomBackground: TPanel
@@ -457,7 +490,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 684
         Height = 510
-        ActivePage = TabSheet4
+        ActivePage = TabSheet5
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
@@ -537,7 +570,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitTop = 8
             DesignSize = (
               676
               49)
@@ -590,7 +622,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitTop = 57
             object Panel11: TPanel
               AlignWithMargins = True
               Left = 15
@@ -653,7 +684,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitTop = 57
             object Panel12: TPanel
               AlignWithMargins = True
               Left = 15
@@ -697,7 +727,6 @@ object frmMain: TfrmMain
                 ScrollBars = ssBoth
                 TabOrder = 0
                 Zoom = 100
-                ExplicitHeight = 477
               end
             end
           end
@@ -713,7 +742,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitTop = 8
             DesignSize = (
               676
               49)
@@ -1038,7 +1066,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitTop = 8
             DesignSize = (
               676
               49)
@@ -1124,7 +1151,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitTop = 57
             object Panel19: TPanel
               AlignWithMargins = True
               Left = 15
@@ -1169,6 +1195,247 @@ object frmMain: TfrmMain
                 TabOrder = 0
                 Zoom = 100
               end
+            end
+          end
+        end
+        object TabSheet5: TTabSheet
+          Caption = 'TabSheet5'
+          ImageIndex = 4
+          object Panel16: TPanel
+            Left = 0
+            Top = 49
+            Width = 676
+            Height = 391
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            object Panel20: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 0
+              Width = 646
+              Height = 391
+              Margins.Left = 15
+              Margins.Top = 0
+              Margins.Right = 15
+              Margins.Bottom = 0
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'Panel8'
+              Color = 2170138
+              Padding.Left = 1
+              Padding.Top = 1
+              Padding.Right = 1
+              Padding.Bottom = 1
+              ParentBackground = False
+              TabOrder = 0
+              object PC_JSON: TPageControl
+                Left = 1
+                Top = 1
+                Width = 644
+                Height = 389
+                ActivePage = TabSheet6
+                Align = alClient
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -11
+                Font.Name = 'Segoe UI'
+                Font.Style = []
+                MultiLine = True
+                ParentFont = False
+                Style = tsFlatButtons
+                TabOrder = 0
+                ExplicitLeft = 0
+                ExplicitTop = -4
+                object TabSheet6: TTabSheet
+                  Caption = 'TabSheet6'
+                  object Panel26: TPanel
+                    Left = 0
+                    Top = 0
+                    Width = 636
+                    Height = 358
+                    Align = alClient
+                    BevelOuter = bvNone
+                    Caption = 'Panel26'
+                    Color = 4998722
+                    Padding.Left = 1
+                    Padding.Top = 1
+                    Padding.Right = 1
+                    Padding.Bottom = 1
+                    ParentBackground = False
+                    ShowCaption = False
+                    TabOrder = 0
+                    ExplicitLeft = 224
+                    ExplicitTop = 160
+                    ExplicitWidth = 185
+                    ExplicitHeight = 41
+                    object JSONTree: TJSONTreeView
+                      Left = 1
+                      Top = 1
+                      Width = 634
+                      Height = 356
+                      Align = alClient
+                      BevelInner = bvNone
+                      BevelOuter = bvNone
+                      BorderStyle = bsNone
+                      Color = 3617069
+                      Font.Charset = DEFAULT_CHARSET
+                      Font.Color = 13487051
+                      Font.Height = -12
+                      Font.Name = 'Segoe UI Semibold'
+                      Font.Style = []
+                      Indent = 19
+                      MultiSelect = True
+                      ParentFont = False
+                      TabOrder = 0
+                      JSONDocument = dmMain.JSONDocument
+                      VisibleChildrenCounts = True
+                      VisibleByteSizes = False
+                      ExplicitLeft = 0
+                      ExplicitTop = 0
+                      ExplicitWidth = 636
+                      ExplicitHeight = 358
+                    end
+                  end
+                end
+                object TabSheet7: TTabSheet
+                  Caption = 'TabSheet7'
+                  ImageIndex = 1
+                  object Panel25: TPanel
+                    Left = 0
+                    Top = 0
+                    Width = 636
+                    Height = 358
+                    Margins.Left = 15
+                    Margins.Top = 15
+                    Margins.Right = 15
+                    Margins.Bottom = 0
+                    Align = alClient
+                    BevelOuter = bvNone
+                    Caption = 'Panel8'
+                    Color = 4998722
+                    Padding.Left = 1
+                    Padding.Top = 1
+                    Padding.Right = 1
+                    Padding.Bottom = 1
+                    ParentBackground = False
+                    TabOrder = 0
+                    object reJSONView: TRichEdit
+                      Left = 1
+                      Top = 1
+                      Width = 634
+                      Height = 356
+                      Margins.Left = 1
+                      Margins.Top = 1
+                      Margins.Right = 1
+                      Margins.Bottom = 1
+                      Align = alClient
+                      BevelInner = bvNone
+                      BevelOuter = bvNone
+                      BorderStyle = bsNone
+                      Color = 3617069
+                      Font.Charset = ANSI_CHARSET
+                      Font.Color = 13487051
+                      Font.Height = -12
+                      Font.Name = 'Consolas'
+                      Font.Style = []
+                      ParentFont = False
+                      ScrollBars = ssBoth
+                      TabOrder = 0
+                      Zoom = 100
+                    end
+                  end
+                end
+              end
+            end
+          end
+          object Panel21: TPanel
+            Left = 0
+            Top = 440
+            Width = 676
+            Height = 39
+            Align = alBottom
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 1
+          end
+          object Panel22: TPanel
+            Left = 0
+            Top = 0
+            Width = 676
+            Height = 49
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 2
+            DesignSize = (
+              676
+              49)
+            object Label12: TLabel
+              AlignWithMargins = True
+              Left = 16
+              Top = 13
+              Width = 134
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Visualizar JSON'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object pnJSONText: TPanel
+              Tag = 22
+              Left = 562
+              Top = 22
+              Width = 98
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'JSON Text'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = pnJSONTextClick
+            end
+            object pnJSONVisualizacao: TPanel
+              Tag = 22
+              Left = 458
+              Top = 22
+              Width = 98
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvLowered
+              Caption = 'Visualiza'#231#227'o'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 1
+              OnClick = pnJSONVisualizacaoClick
             end
           end
         end
@@ -1454,8 +1721,8 @@ object frmMain: TfrmMain
       end
     end
     object PNEvents: TPanel
-      Left = 52
-      Top = 10
+      Left = 743
+      Top = 9
       Width = 21
       Height = 18
       Caption = 'PNEvents'

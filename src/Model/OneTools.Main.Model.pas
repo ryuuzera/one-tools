@@ -3,12 +3,13 @@ unit OneTools.Main.Model;
 interface
 
 uses
-  System.Classes, OneTools.Main.View, Vcl.ExtCtrls, DateUtils, SysUtils;
+  System.Classes, Vcl.ExtCtrls, DateUtils, SysUtils, JSONDoc;
 
 type
   TdmMain = class(TDataModule)
     TimerSenha: TTimer;
     TimerFontSQL: TTimer;
+    JSONDocument: TJSONDocument;
     procedure TimerSenhaTimer(Sender: TObject);
   private
     { Private declarations }
@@ -22,7 +23,7 @@ var
 implementation
 
 uses
-  Vcl.Graphics;
+  Vcl.Graphics, OneTools.Main.View;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 

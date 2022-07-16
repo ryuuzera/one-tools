@@ -11,7 +11,6 @@ object frmBase1: TfrmBase1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object pnTop: TPanel
@@ -26,7 +25,7 @@ object frmBase1: TfrmBase1
     ShowCaption = False
     TabOrder = 0
     object pnClose: TPanel
-      Left = 397
+      Left = 473
       Top = 0
       Width = 38
       Height = 33
@@ -37,6 +36,7 @@ object frmBase1: TfrmBase1
       ParentBackground = False
       ShowCaption = False
       TabOrder = 0
+      ExplicitLeft = 491
       object imgClose: TImage
         Tag = 21
         Left = 0
@@ -130,7 +130,7 @@ object frmBase1: TfrmBase1
       end
     end
     object pnMinimize: TPanel
-      Left = 473
+      Left = 397
       Top = 0
       Width = 38
       Height = 33
@@ -141,6 +141,7 @@ object frmBase1: TfrmBase1
       ParentBackground = False
       ShowCaption = False
       TabOrder = 2
+      ExplicitLeft = 353
       object imgMinimize: TImage
         Tag = 21
         Left = 0
@@ -166,6 +167,17 @@ object frmBase1: TfrmBase1
         ExplicitWidth = 105
         ExplicitHeight = 105
       end
+    end
+    object PNEvents: TPanel
+      Left = 18
+      Top = 9
+      Width = 21
+      Height = 18
+      Caption = 'PNEvents'
+      TabOrder = 3
+      Visible = False
+      OnMouseEnter = PNEventsMouseEnter
+      OnMouseLeave = PNEventsMouseLeave
     end
   end
   object Panel1: TPanel

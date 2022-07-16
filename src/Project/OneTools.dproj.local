@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/07/15 12:52:41.000.072,=C:\Users\DobesOne\Documents\Fagner\one-tools-main\src\Project\Unit1.pas</Transaction>
+    <Transaction>2022/07/15 12:53:21.000.833,C:\Users\DobesOne\Documents\Fagner\one-tools-main\src\Controller\Private\OneTools.Privacy.Controller.pas=C:\Users\DobesOne\Documents\Fagner\one-tools-main\src\Project\Unit1.pas</Transaction>
+    <Transaction>2022/07/16 17:25:31.568,=D:\Projetos\OneTools-v2\src\View\JSONDoc.pas</Transaction>
+    <Transaction>2022/07/16 17:25:42.961,=D:\Projetos\OneTools-v2\src\View\JSONTreeView.pas</Transaction>
+  </Transactions>
+</BorlandProject>

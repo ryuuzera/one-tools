@@ -4,7 +4,7 @@ interface
 
 uses
   Vcl.WinXCtrls, System.Classes, Vcl.Forms, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Controls;
+  Vcl.Controls, Vcl.Graphics, OneTools.Main.Model;
 
 type
    TMainController = class
@@ -19,14 +19,16 @@ type
        function Criptografar(ATexto: String): String;
        function Descriptografar(ATexto: String): String;
        procedure OnCreate(AForm: TForm);
+       procedure ControlaJSONViewer;
    end;
 
 procedure SetMouseMove(Component: TObject);
 procedure SetMouseLeave(Component: TObject);
 procedure ControlaNav(Nav: TShape; Sender: TObject; PageControl: TPageControl; Page: Integer);
-function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
-      EliminaEspacos: Boolean = False): String;
+procedure GeraSQLtoDelphi(RE: TRichEdit; AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
+      EliminaEspacos: Boolean = False);
 procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinControl);
+procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
 
 
 implementation
@@ -34,9 +36,27 @@ implementation
 uses
   OneTools.Main.View,
   OneTools.Styles.Constants.View, Vcl.StdCtrls, System.SysUtils, Vcl.Dialogs, OneTools.DialogBox.View,
-  OneTools.Privacy.Controller;
+  OneTools.Privacy.Controller, Winapi.Messages;
 
 { TMainController }
+
+procedure TMainController.ControlaJSONViewer;
+begin
+   if (frmMain.PC_JSON.ActivePageIndex = 0) then
+   begin
+      frmMain.pnJSONVisualizacao.BevelOuter := bvLowered;
+      frmMain.pnJSONText.BevelOuter := bvNone;
+   end
+   else
+   begin
+      frmMain.pnJSONVisualizacao.BevelOuter := bvNone;
+      frmMain.pnJSONText.BevelOuter := bvLowered;
+   end;
+
+   dmMain.JSONDocument.JSONText := frmMain.reJSONView.Text;
+   frmMain.JSONTree.LoadJson;
+//   ControlaNav(nil, Sender, frmMain.PC_JSON, 0);
+end;
 
 procedure TMainController.ControlaSplitView(var ASplitView: TSplitView);
 begin
@@ -171,7 +191,12 @@ procedure TMainController.OnCreate(AForm: TForm);
 begin
    SetCursor(AForm);
    SetEvents(AForm);
-   EsconderTabs(FrmMain.PageControl1);
+   if AForm.ClassName = 'TfrmMain' then
+   begin
+      EsconderTabs(FrmMain.PageControl1);
+      EsconderTabs(FrmMain.PC_JSON);
+      FrmMain.reJSONView.MaxLength := System.MaxInt-2;
+   end;
 end;
 
 procedure SetMouseLeave(Component: TObject);
@@ -269,59 +294,62 @@ procedure ControlaNav(Nav: TShape; Sender: TObject; PageControl: TPageControl; P
 begin
   if Sender is TPanel then
   begin
-     Nav.Parent := TPanel(Sender);
+     if Assigned(Nav) then
+        Nav.Parent := TPanel(Sender);
      TPanel(Sender).Repaint;
   end
   else if Sender is TLabel then
   begin
-    Nav.Parent := TPanel(TLabel(Sender).Parent);
+    if Assigned(Nav) then
+       Nav.Parent := TPanel(TLabel(Sender).Parent);
     TPanel(TLabel(Sender).Parent).Repaint;
   end;
   PageControl.ActivePage := PageControl.Pages[Page];
 end;
 
-function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
-   EliminaEspacos: boolean = False): String;
+procedure GeraSQLtoDelphi(RE: TRichEdit; AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
+   EliminaEspacos: boolean = False);
 var
    I: Integer;
    LCodigo: TStringlist;
 begin
    LCodigo := TStringlist.Create;
+   LCodigo.Text := ATexto.Text;
+   RE.Lines.Clear;
    try
       if State = tssOn then
       begin
-         LCodigo.Add(AComponenteSQL+' := '+AComponenteSQL+'.Create(nil);');
-         LCodigo.Add('try');
+         RE.Lines.Add(AComponenteSQL+' := '+AComponenteSQL+'.Create(nil);');
+         RE.Lines.Add('try');
       end;
 
-      for i := 0 to ATexto.Count -1 do
+      for i := 0 to LCodigo.Count -1 do
       begin
-         with LCodigo do
+         with RE.Lines do
          begin
             if State = tssOn then
             begin
                if not (EliminaEspacos) then
-                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');')
+                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(LCodigo[i]) + ');')
                else
-                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(ATexto[i])) + ');');
+                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(LCodigo[i])) + ');');
             end
             else
             begin
                if not (EliminaEspacos) then
-                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');')
+                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(LCodigo[i]) + ');')
                else
-                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(ATexto[i])) + ');');
+                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(LCodigo[i])) + ');');
             end;
          end;
       end;
 
       if State = tssOn then
       begin
-         LCodigo.Add('finally');
-         LCodigo.Add('   '+AComponenteSQL+'.Free;');
-         LCodigo.Add('end;');
+         RE.Lines.Add('finally');
+         RE.Lines.Add('   '+AComponenteSQL+'.Free;');
+         RE.Lines.Add('end;');
       end;
-      Result := LCodigo.Text;
    finally
       LCodigo.Free;
    end;
@@ -331,9 +359,24 @@ procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinCon
 begin
   if (Condicao) then
   begin
-    MessageBox := TMessageBox.Create(frmMain, AMensagem, mtInformation);
+    TMessageBox.Show(AMensagem, mtError, [mbOK]);
     AFoco.SetFocus;
     Abort;
+  end;
+end;
+
+procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
+Var
+  FoundAt : integer;
+begin
+  FoundAt := RE.FindText(AWord,0,maxInt,AOptions);
+  while FoundAt <> -1 do
+  begin
+           RE.SelStart := FoundAt;
+           RE.SelLength := Length(AWord);
+           RE.SelAttributes.Color := Color;
+           RE.SelText := AWord;
+           FoundAt:= RE.FindText(AWord,FoundAt + length(AWord),maxInt,AOptions);
   end;
 end;
 
