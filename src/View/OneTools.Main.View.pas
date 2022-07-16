@@ -42,9 +42,6 @@ type
     pnBodyCenter: TPanel;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     lbSenha: TLabel;
@@ -69,6 +66,33 @@ type
     lbDev: TLabel;
     Image2: TImage;
     lbSource: TLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label8: TLabel;
+    pnIndentar: TPanel;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    reIndentarAuto: TRichEdit;
+    Label7: TLabel;
+    edIdentCharLinha: TEdit;
+    Shape2: TShape;
+    Panel4: TPanel;
+    Panel12: TPanel;
+    reDebugString: TRichEdit;
+    Panel13: TPanel;
+    Label9: TLabel;
+    pnConverterDebug: TPanel;
+    Panel15: TPanel;
+    Label10: TLabel;
+    swEliminaEspacos: TToggleSwitch;
+    Panel14: TPanel;
+    Label11: TLabel;
+    pnCriptografar: TPanel;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Panel19: TPanel;
+    reCriptografia: TRichEdit;
+    pnDescriptografar: TPanel;
     procedure pnTopMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
     procedure imgCloseClick(Sender: TObject);
@@ -85,6 +109,10 @@ type
     procedure pnCriptoXMLClick(Sender: TObject);
     procedure lbSourceClick(Sender: TObject);
     procedure lbDevClick(Sender: TObject);
+    procedure pnIndentarClick(Sender: TObject);
+    procedure pnConverterDebugClick(Sender: TObject);
+    procedure pnCriptografarClick(Sender: TObject);
+    procedure pnDescriptografarClick(Sender: TObject);
   private
      { Private declarations }
     function GetBorderSpace: Integer;
@@ -113,7 +141,11 @@ uses
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
    with TMainController.Create do
+   try
       OnCreate(Self);
+   finally
+      Free;
+   end;
 end;
 
 function TfrmMain.GetBorderSpace: Integer;
@@ -147,7 +179,11 @@ end;
 procedure TfrmMain.imgMenuClick(Sender: TObject);
 begin
    with TMainController.Create do
+   try
       ControlaSplitView(SplitView);
+   finally
+      Free;
+   end;
 end;
 
 procedure TfrmMain.imgMinimizeClick(Sender: TObject);
@@ -196,9 +232,55 @@ begin
    ControlaNav(Nav, Sender, PageControl1, 2);
 end;
 
+procedure TfrmMain.pnConverterDebugClick(Sender: TObject);
+begin
+   with TMainController.Create do
+   try
+
+   finally
+      Free;
+   end;
+end;
+
+procedure TfrmMain.pnCriptografarClick(Sender: TObject);
+var
+   Cripto: TStringlist;
+   I: Integer;
+begin
+   Cripto := TStringlist.Create;
+   with TMainController.Create do
+   try
+      for I := 0 to Pred(reCriptografia.Lines.Count) do
+         Cripto.Add(Criptografar(reCriptografia.Lines[i]));
+      reCriptoGrafia.Lines.Clear;
+      reCriptoGrafia.Lines.Text := Cripto.Text;
+   finally
+      Free;
+      Cripto.Free;
+   end;
+end;
+
 procedure TfrmMain.pnCriptoXMLClick(Sender: TObject);
 begin
    ControlaNav(Nav, Sender, PageControl1, 3);
+end;
+
+procedure TfrmMain.pnDescriptografarClick(Sender: TObject);
+var
+   Cripto: TStringlist;
+   I: Integer;
+begin
+   Cripto := TStringlist.Create;
+   with TMainController.Create do
+   try
+      for I := 0 to Pred(reCriptografia.Lines.Count) do
+         Cripto.Add(Descriptografar(reCriptografia.Lines[i]));
+      reCriptoGrafia.Lines.Clear;
+      reCriptoGrafia.Lines.Text := Cripto.Text;
+   finally
+      Free;
+      Cripto.Free;
+   end;
 end;
 
 procedure TfrmMain.pnGerarSQLDelphiClick(Sender: TObject);
@@ -206,7 +288,22 @@ begin
   ValidarCampoVazio(String(edSQLDelphi.Text).IsEmpty, 'Insira o nome do componente SQL!', edSQLDelphi);
   reSQLtoDelphi.Text := GeraSQLtoDelphi(edSQLDelphi.Text,
                                           reSQLtoDelphi.Lines,
-                                            swGeraCreate.State);
+                                            swGeraCreate.State,
+                                            swEliminaEspacos.State = tssOn);
+end;
+
+procedure TfrmMain.pnIndentarClick(Sender: TObject);
+begin
+   ValidarCampoVazio(String(edIdentCharLinha.Text).IsEmpty,
+                        'Insira o limite máximo de caracteres por linha!',
+                           edIdentCharLinha);
+   with TMainController.Create do
+   try
+      IndentarTexto(reIndentarAuto,
+         String(edIdentCharLinha.Text).ToInteger);
+   finally
+      Free;
+   end;
 end;
 
 procedure TfrmMain.pnSQLIdentClick(Sender: TObject);

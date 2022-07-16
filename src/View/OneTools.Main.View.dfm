@@ -1,6 +1,7 @@
 object frmMain: TfrmMain
   Left = 0
   Top = 0
+  AlphaBlendValue = 253
   Caption = 'One Tools'
   ClientHeight = 586
   ClientWidth = 886
@@ -456,7 +457,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 684
         Height = 510
-        ActivePage = TabSheet3
+        ActivePage = TabSheet4
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
@@ -464,14 +465,65 @@ object frmMain: TfrmMain
           Caption = 'TabSheet1'
           object Panel2: TPanel
             Left = 0
-            Top = 49
+            Top = 440
             Width = 676
-            Height = 359
-            Align = alClient
+            Height = 39
+            Align = alBottom
             BevelOuter = bvNone
             Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
             ShowCaption = False
             TabOrder = 0
+            DesignSize = (
+              676
+              39)
+            object Label7: TLabel
+              AlignWithMargins = True
+              Left = 15
+              Top = 14
+              Width = 153
+              Height = 17
+              Margins.Left = 10
+              Anchors = [akLeft, akBottom]
+              Caption = 'Limite Carateres por Linha'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -13
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object Shape2: TShape
+              Left = 175
+              Top = 12
+              Width = 80
+              Height = 25
+              Anchors = [akLeft, akBottom]
+              Brush.Color = 5655365
+              Pen.Color = 5655365
+              Shape = stRoundRect
+            end
+            object edIdentCharLinha: TEdit
+              Left = 177
+              Top = 14
+              Width = 78
+              Height = 21
+              Anchors = [akLeft, akBottom]
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Color = 5655365
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 13487051
+              Font.Height = -13
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              NumbersOnly = True
+              ParentFont = False
+              TabOrder = 0
+            end
           end
           object Panel3: TPanel
             Left = 0
@@ -481,24 +533,240 @@ object frmMain: TfrmMain
             Align = alTop
             BevelOuter = bvNone
             Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
             ShowCaption = False
             TabOrder = 1
+            ExplicitTop = 8
+            DesignSize = (
+              676
+              49)
+            object Label8: TLabel
+              AlignWithMargins = True
+              Left = 16
+              Top = 13
+              Width = 201
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Indenta'#231#227'o Autom'#225'tica'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object pnIndentar: TPanel
+              Tag = 22
+              Left = 574
+              Top = 14
+              Width = 87
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Indentar'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = pnIndentarClick
+            end
           end
-          object Panel4: TPanel
+          object Panel10: TPanel
             Left = 0
-            Top = 408
+            Top = 49
             Width = 676
-            Height = 71
-            Align = alBottom
+            Height = 391
+            Align = alClient
             BevelOuter = bvNone
             Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
             ShowCaption = False
             TabOrder = 2
+            ExplicitTop = 57
+            object Panel11: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 0
+              Width = 646
+              Height = 391
+              Margins.Left = 15
+              Margins.Top = 0
+              Margins.Right = 15
+              Margins.Bottom = 0
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'Panel8'
+              Color = 4998722
+              Padding.Left = 1
+              Padding.Top = 1
+              Padding.Right = 1
+              Padding.Bottom = 1
+              ParentBackground = False
+              TabOrder = 0
+              object reIndentarAuto: TRichEdit
+                Left = 1
+                Top = 1
+                Width = 644
+                Height = 389
+                Margins.Left = 1
+                Margins.Top = 1
+                Margins.Right = 1
+                Margins.Bottom = 1
+                Align = alClient
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                BorderStyle = bsNone
+                Color = 2959396
+                Font.Charset = ANSI_CHARSET
+                Font.Color = 13487051
+                Font.Height = -12
+                Font.Name = 'Consolas'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                Zoom = 100
+              end
+            end
           end
         end
         object TabSheet2: TTabSheet
           Caption = 'TabSheet2'
           ImageIndex = 1
+          object Panel4: TPanel
+            Left = 0
+            Top = 49
+            Width = 676
+            Height = 391
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            ExplicitTop = 57
+            object Panel12: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 0
+              Width = 646
+              Height = 391
+              Margins.Left = 15
+              Margins.Top = 0
+              Margins.Right = 15
+              Margins.Bottom = 0
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'Panel8'
+              Color = 4998722
+              Padding.Left = 1
+              Padding.Top = 1
+              Padding.Right = 1
+              Padding.Bottom = 1
+              ParentBackground = False
+              TabOrder = 0
+              object reDebugString: TRichEdit
+                Left = 1
+                Top = 1
+                Width = 644
+                Height = 389
+                Margins.Left = 1
+                Margins.Top = 1
+                Margins.Right = 1
+                Margins.Bottom = 1
+                Align = alClient
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                BorderStyle = bsNone
+                Color = 2959396
+                Font.Charset = ANSI_CHARSET
+                Font.Color = 13487051
+                Font.Height = -12
+                Font.Name = 'Consolas'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                Zoom = 100
+                ExplicitHeight = 477
+              end
+            end
+          end
+          object Panel13: TPanel
+            Left = 0
+            Top = 0
+            Width = 676
+            Height = 49
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 1
+            ExplicitTop = 8
+            DesignSize = (
+              676
+              49)
+            object Label9: TLabel
+              AlignWithMargins = True
+              Left = 16
+              Top = 13
+              Width = 112
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Debug String'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object pnConverterDebug: TPanel
+              Tag = 22
+              Left = 574
+              Top = 14
+              Width = 87
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Converter'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = pnConverterDebugClick
+            end
+          end
+          object Panel15: TPanel
+            Left = 0
+            Top = 440
+            Width = 676
+            Height = 39
+            Align = alBottom
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 2
+          end
         end
         object TabSheet3: TTabSheet
           Caption = 'TabSheet3'
@@ -515,6 +783,9 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
+            DesignSize = (
+              676
+              39)
             object Label6: TLabel
               AlignWithMargins = True
               Left = 59
@@ -522,7 +793,25 @@ object frmMain: TfrmMain
               Width = 136
               Height = 17
               Margins.Left = 10
+              Anchors = [akLeft, akBottom]
               Caption = 'Gerar Create Try/Finally'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -13
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object Label10: TLabel
+              AlignWithMargins = True
+              Left = 267
+              Top = 10
+              Width = 191
+              Height = 17
+              Margins.Left = 10
+              Anchors = [akLeft, akBottom]
+              Caption = 'Eliminar Espa'#231'os desnecess'#225'rios'
               Font.Charset = ANSI_CHARSET
               Font.Color = 13487051
               Font.Height = -13
@@ -537,6 +826,8 @@ object frmMain: TfrmMain
               Top = 10
               Width = 37
               Height = 20
+              Anchors = [akLeft, akBottom]
+              Color = 11974326
               Font.Charset = DEFAULT_CHARSET
               Font.Color = 13487051
               Font.Height = -13
@@ -552,6 +843,29 @@ object frmMain: TfrmMain
               TabOrder = 0
               ThumbColor = 5926637
             end
+            object swEliminaEspacos: TToggleSwitch
+              Tag = 10
+              Left = 223
+              Top = 10
+              Width = 37
+              Height = 20
+              Anchors = [akLeft, akBottom]
+              Color = 11974326
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 13487051
+              Font.Height = -13
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              Font.Quality = fqClearType
+              FrameColor = 789003
+              ParentFont = False
+              ShowStateCaption = False
+              StateCaptions.CaptionOn = 'Gerar Create com Try/Finally '
+              StateCaptions.CaptionOff = 'Gerar Create com Try/Finally '
+              SwitchWidth = 37
+              TabOrder = 1
+              ThumbColor = 5926637
+            end
           end
           object Panel6: TPanel
             Left = 0
@@ -565,6 +879,9 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
+            DesignSize = (
+              676
+              49)
             object Label4: TLabel
               AlignWithMargins = True
               Left = 16
@@ -588,6 +905,7 @@ object frmMain: TfrmMain
               Width = 102
               Height = 17
               Margins.Left = 10
+              Anchors = [akTop, akRight]
               Caption = 'Componente SQL'
               Font.Charset = ANSI_CHARSET
               Font.Color = 13487051
@@ -602,6 +920,7 @@ object frmMain: TfrmMain
               Top = 15
               Width = 142
               Height = 25
+              Anchors = [akTop, akRight]
               Brush.Color = 5655365
               Pen.Color = 5655365
               Shape = stRoundRect
@@ -611,6 +930,7 @@ object frmMain: TfrmMain
               Top = 18
               Width = 136
               Height = 21
+              Anchors = [akTop, akRight]
               BevelInner = bvNone
               BevelOuter = bvNone
               BorderStyle = bsNone
@@ -629,6 +949,7 @@ object frmMain: TfrmMain
               Top = 14
               Width = 87
               Height = 27
+              Anchors = [akTop, akRight]
               BevelOuter = bvNone
               Caption = 'Gerar'
               Color = 5926637
@@ -705,6 +1026,151 @@ object frmMain: TfrmMain
         object TabSheet4: TTabSheet
           Caption = 'TabSheet4'
           ImageIndex = 3
+          object Panel14: TPanel
+            Left = 0
+            Top = 0
+            Width = 676
+            Height = 49
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            ExplicitTop = 8
+            DesignSize = (
+              676
+              49)
+            object Label11: TLabel
+              AlignWithMargins = True
+              Left = 16
+              Top = 13
+              Width = 173
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Criptografia de XML'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object pnCriptografar: TPanel
+              Tag = 22
+              Left = 559
+              Top = 13
+              Width = 98
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Criptografar'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = pnCriptografarClick
+            end
+            object pnDescriptografar: TPanel
+              Tag = 22
+              Left = 455
+              Top = 13
+              Width = 98
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Descriptografar'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 1
+              OnClick = pnDescriptografarClick
+            end
+          end
+          object Panel17: TPanel
+            Left = 0
+            Top = 440
+            Width = 676
+            Height = 39
+            Align = alBottom
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 1
+          end
+          object Panel18: TPanel
+            Left = 0
+            Top = 49
+            Width = 676
+            Height = 391
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 2
+            ExplicitTop = 57
+            object Panel19: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 0
+              Width = 646
+              Height = 391
+              Margins.Left = 15
+              Margins.Top = 0
+              Margins.Right = 15
+              Margins.Bottom = 0
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'Panel8'
+              Color = 4998722
+              Padding.Left = 1
+              Padding.Top = 1
+              Padding.Right = 1
+              Padding.Bottom = 1
+              ParentBackground = False
+              TabOrder = 0
+              object reCriptografia: TRichEdit
+                Left = 1
+                Top = 1
+                Width = 644
+                Height = 389
+                Margins.Left = 1
+                Margins.Top = 1
+                Margins.Right = 1
+                Margins.Bottom = 1
+                Align = alClient
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                BorderStyle = bsNone
+                Color = 2959396
+                Font.Charset = ANSI_CHARSET
+                Font.Color = 13487051
+                Font.Height = -12
+                Font.Name = 'Consolas'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                Zoom = 100
+              end
+            end
+          end
         end
       end
       object Panel9: TPanel
@@ -718,14 +1184,16 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 1
-        ExplicitLeft = 5
-        ExplicitTop = 512
+        DesignSize = (
+          684
+          41)
         object lbDev: TLabel
           Tag = 10
           Left = 7
           Top = 23
           Width = 106
           Height = 13
+          Anchors = [akLeft, akBottom]
           Caption = 'Dev Fagner Menezes'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 13487051
@@ -740,6 +1208,7 @@ object frmMain: TfrmMain
           Top = 20
           Width = 25
           Height = 20
+          Anchors = [akRight, akBottom]
           Center = True
           Picture.Data = {
             0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
@@ -781,6 +1250,7 @@ object frmMain: TfrmMain
           Top = 23
           Width = 64
           Height = 13
+          Anchors = [akRight, akBottom]
           Caption = 'Source Code'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = 13487051

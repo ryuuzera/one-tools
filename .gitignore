@@ -1,0 +1,16 @@
+
+*.exe
+src/Project/Win32/Debug/OneTools.exe
+*.dcu
+assets/icons/ezgif-4-b33a58cf03.gif
+__history/
+DCU/
+src/Controller/__history/
+src/View/__history/
+src/Model/__history/
+*.~1~
+src/Controller/__history/OneTools.Forms.Controller.pas.~1~
+src/Controller/__history/OneTools.Forms.Controller.pas.~2~
+src/Controller/Private/OneTools.Privacy.Controller.pas
+*.dcu
+src/Project/Win32/Debug/OneTools.exe

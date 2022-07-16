@@ -14,20 +14,27 @@ type
        procedure EsconderTabs(PageControl: TPageControl);
     public
        procedure ControlaSplitView(var ASplitView: TSplitView);
+       procedure IndentarTexto(RichEdit: TRichEdit; Limit: Integer);
+       procedure DebugarString(RichEdit: TRichEdit);
+       function Criptografar(ATexto: String): String;
+       function Descriptografar(ATexto: String): String;
        procedure OnCreate(AForm: TForm);
    end;
 
 procedure SetMouseMove(Component: TObject);
 procedure SetMouseLeave(Component: TObject);
 procedure ControlaNav(Nav: TShape; Sender: TObject; PageControl: TPageControl; Page: Integer);
-function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState): String;
+function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
+      EliminaEspacos: Boolean = False): String;
 procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinControl);
+
 
 implementation
 
 uses
   OneTools.Main.View,
-  OneTools.Styles.Constants.View, Vcl.StdCtrls, System.SysUtils, Vcl.Dialogs, OneTools.DialogBox.View;
+  OneTools.Styles.Constants.View, Vcl.StdCtrls, System.SysUtils, Vcl.Dialogs, OneTools.DialogBox.View,
+  OneTools.Privacy.Controller;
 
 { TMainController }
 
@@ -39,12 +46,125 @@ begin
       ASplitView.Open;
 end;
 
+function TMainController.Criptografar(ATexto: String): String;
+var
+   iKeyLen : Integer;
+   iKeyPos : Integer;
+   iOffSet : Integer;
+   sDest   : string;
+   iPos    : Integer;
+   iAsc    : Integer;
+begin
+   Result := '';
+   if Trim(ATexto) <> '' then
+   begin
+      iKeyLen := Length(CHAVE);
+      iKeyPos := 0;
+
+      Randomize;
+      iOffSet := Random(256);
+      sDest   := Format('%1.2x',[iOffSet]);
+
+      for iPos := 1 to Length(ATexto) do
+      begin
+         iAsc := (Ord(ATexto[iPos]) + iOffSet) mod 255;
+         if iKeyPos < iKeyLen then
+            iKeyPos := iKeyPos + 1
+         else
+            iKeyPos := 1;
+
+         iAsc    := iAsc xor Ord(CHAVE[iKeyPos]);
+         sDest   := sDest + Format('%1.2x',[iAsc]);
+         iOffSet := iAsc;
+      end;
+      Result := sDest;
+   end;
+end;
+
+procedure TMainController.DebugarString(RichEdit: TRichEdit);
+begin
+   RichEdit.Lines.Text := StringReplace(RichEdit.Lines.Text, '#$D#$A', sLineBreak, [rfReplaceAll]);
+   RichEdit.Lines.Text := StringReplace(RichEdit.Lines.Text, #39, '', [rfReplaceAll]);
+end;
+
+function TMainController.Descriptografar(ATexto: String): String;
+var
+   iOffset  : Integer;
+   iPos     : Integer;
+   iAsc     : Integer;
+   iCharAsc : Integer;
+   iKeyPos  : Integer;
+   iKeyLen  : Integer;
+   sDest    : string;
+begin
+   Result := '';
+   if Trim(ATexto) <> '' then
+   begin
+      iKeyLen := Length(CHAVE);
+      iKeyPos := 0;
+      iOffSet := StrToInt('$' + Copy(ATexto, 1, 2));
+      iPos    := 3;
+
+      repeat
+         iAsc := StrToInt('$' + Copy(ATexto, iPos, 2));
+         if iKeyPos < iKeyLen then
+            iKeyPos := iKeyPos + 1
+         else
+            iKeyPos := 1;
+
+         iCharAsc := iAsc xor Ord(CHAVE[iKeyPos]);
+         if iCharAsc <= iOffSet then
+            iCharAsc := 255 + iCharAsc - iOffSet
+         else
+            iCharAsc := iCharAsc - iOffSet;
+
+         sDest   := sDest + Chr(iCharAsc);
+         iOffSet := iAsc;
+         iPos    := iPos + 2;
+      until (iPos >= Length(ATexto));
+
+      Result:= sDest;
+   end;
+end;
+
 procedure TMainController.EsconderTabs(PageControl: TPageControl);
 var
   I: Integer;
 begin
    for I := 0 to Pred(PageControl.PageCount) do
       PageControl.Pages[I].TabVisible := False;
+   PageControl.ActivePage := PageControl.Pages[0];
+end;
+
+procedure TMainController.IndentarTexto(RichEdit: TRichEdit; Limit: Integer);
+var
+   Lista: TStringlist;
+   I: Integer;
+
+      function RPad(value:string; tamanho:integer; caractere:char): string;
+      var
+         i : integer;
+      begin
+         Result := value;
+         if(Length(value) > tamanho)then
+            exit;
+         for i := 1 to (tamanho - Length(value)) do
+            Result := Result + caractere;
+      end;
+
+
+begin
+   Lista := TStringlist.Create;
+   try
+      for I := 0 to Pred(RichEdit.Lines.Count) do
+      begin
+         Lista.Add(QuotedStr(RPad(RichEdit.Lines[i], Limit, ' '))+'+ sLineBreak + ');
+      end;
+      RichEdit.Lines.Clear;
+      RichEdit.Lines.Text := Lista.Text;
+   finally
+      Lista.Free;
+   end;
 end;
 
 procedure TMainController.OnCreate(AForm: TForm);
@@ -160,7 +280,8 @@ begin
   PageControl.ActivePage := PageControl.Pages[Page];
 end;
 
-function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState): String;
+function GeraSQLtoDelphi(AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
+   EliminaEspacos: boolean = False): String;
 var
    I: Integer;
    LCodigo: TStringlist;
@@ -178,9 +299,19 @@ begin
          with LCodigo do
          begin
             if State = tssOn then
-               Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');')
+            begin
+               if not (EliminaEspacos) then
+                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');')
+               else
+                  Add('   '+ AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(ATexto[i])) + ');');
+            end
             else
-               Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');');
+            begin
+               if not (EliminaEspacos) then
+                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(ATexto[i]) + ');')
+               else
+                  Add(AComponenteSQL + '.SQL.Add(' + QuotedStr(Trim(ATexto[i])) + ');');
+            end;
          end;
       end;
 
@@ -200,7 +331,6 @@ procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinCon
 begin
   if (Condicao) then
   begin
-    //MessageDlg(AMensagem, mtInformation, [mbOK], 0);
     MessageBox := TMessageBox.Create(frmMain, AMensagem, mtInformation);
     AFoco.SetFocus;
     Abort;

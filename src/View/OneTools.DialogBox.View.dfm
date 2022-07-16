@@ -17,14 +17,8 @@ inherited MessageBox: TMessageBox
       Font.Style = []
       ParentFont = False
     end
-    inherited pnClose: TPanel
-      ExplicitLeft = 397
-      ExplicitHeight = 33
-    end
     inherited pnMaximize: TPanel
       Visible = False
-      ExplicitLeft = 435
-      ExplicitHeight = 33
       inherited imgMaximize: TImage
         ExplicitLeft = 6
         ExplicitTop = 4
@@ -34,12 +28,9 @@ inherited MessageBox: TMessageBox
     end
     inherited pnMinimize: TPanel
       Visible = False
-      ExplicitLeft = 473
-      ExplicitHeight = 33
     end
   end
   inherited Panel1: TPanel
-    ExplicitTop = 33
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -252,13 +243,14 @@ inherited MessageBox: TMessageBox
         Caption = 'TEXTO DA MENSAGEM'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 11711154
-        Font.Height = -12
+        Font.Height = -13
         Font.Name = 'Segoe UI Semibold'
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 125
-        ExplicitHeight = 15
+        WordWrap = True
+        ExplicitWidth = 137
+        ExplicitHeight = 17
       end
       object Panel4: TPanel
         Left = 0
@@ -277,7 +269,7 @@ inherited MessageBox: TMessageBox
           Height = 35
           BevelOuter = bvNone
           Caption = 'OK'
-          Color = 952062
+          Color = 5926637
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWhite
           Font.Height = -11
