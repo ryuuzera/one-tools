@@ -14,6 +14,7 @@ object dmMain: TdmMain
     Top = 16
   end
   object JSONDocument: TJSONDocument
+    OnChange = JSONDocumentChange
     Left = 24
     Top = 72
   end

@@ -11,6 +11,7 @@ type
     TimerFontSQL: TTimer;
     JSONDocument: TJSONDocument;
     procedure TimerSenhaTimer(Sender: TObject);
+    procedure JSONDocumentChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,7 +30,12 @@ uses
 
 {$R *.dfm}
 
-procedure TdmMain.TimerSenhaTimer(Sender: TObject);
+pprocedure TdmMain.JSONDocumentChange(Sender: TObject);
+begin
+
+end;
+
+rocedure TdmMain.TimerSenhaTimer(Sender: TObject);
 var
    SenhaDoDia,
    iDia,

@@ -195,7 +195,7 @@ begin
    begin
       EsconderTabs(FrmMain.PageControl1);
       EsconderTabs(FrmMain.PC_JSON);
-      FrmMain.reJSONView.MaxLength := System.MaxInt-2;
+      frmMain.reJSONView.MaxLength := System.MaxInt-2;
    end;
 end;
 
@@ -359,7 +359,7 @@ procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinCon
 begin
   if (Condicao) then
   begin
-    TMessageBox.Show(AMensagem, mtError, [mbOK]);
+    MessageShow(AMensagem, mtInformation, [mbOK]);
     AFoco.SetFocus;
     Abort;
   end;
@@ -372,11 +372,11 @@ begin
   FoundAt := RE.FindText(AWord,0,maxInt,AOptions);
   while FoundAt <> -1 do
   begin
-           RE.SelStart := FoundAt;
-           RE.SelLength := Length(AWord);
-           RE.SelAttributes.Color := Color;
-           RE.SelText := AWord;
-           FoundAt:= RE.FindText(AWord,FoundAt + length(AWord),maxInt,AOptions);
+     RE.SelStart := FoundAt;
+     RE.SelLength := Length(AWord);
+     RE.SelAttributes.Color := Color;
+     RE.SelText := AWord;
+     FoundAt:= RE.FindText(AWord,FoundAt + length(AWord),maxInt,AOptions);
   end;
 end;
 

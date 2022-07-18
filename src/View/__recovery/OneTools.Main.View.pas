@@ -337,7 +337,7 @@ end;
 procedure TfrmMain.pnIndentarClick(Sender: TObject);
 begin
    ValidarCampoVazio(String(edIdentCharLinha.Text).IsEmpty,
-                        'Insira o limite m·ximo de caracteres por linha!',
+                        'Insira o limite m√°ximo de caracteres por linha!',
                            edIdentCharLinha);
    with TMainController.Create do
    try

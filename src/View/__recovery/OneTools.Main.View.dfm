@@ -513,7 +513,7 @@ object frmMain: TfrmMain
         Top = 0
         Width = 682
         Height = 523
-        ActivePage = TabSheet4
+        ActivePage = TabSheet5
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
