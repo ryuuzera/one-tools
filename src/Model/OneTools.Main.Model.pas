@@ -3,15 +3,18 @@ unit OneTools.Main.Model;
 interface
 
 uses
-  System.Classes, Vcl.ExtCtrls, DateUtils, SysUtils, JSONDoc;
+  System.Classes, Vcl.ExtCtrls, DateUtils, SysUtils, JSONDoc, REST.Types, REST.Client,
+  Data.Bind.Components, Data.Bind.ObjectScope;
 
 type
   TdmMain = class(TDataModule)
     TimerSenha: TTimer;
     TimerFontSQL: TTimer;
     JSONDocument: TJSONDocument;
+    RESTClient: TRESTClient;
+    RESTRequest: TRESTRequest;
+    RESTResponse: TRESTResponse;
     procedure TimerSenhaTimer(Sender: TObject);
-    procedure JSONDocumentChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,12 +33,7 @@ uses
 
 {$R *.dfm}
 
-pprocedure TdmMain.JSONDocumentChange(Sender: TObject);
-begin
-
-end;
-
-rocedure TdmMain.TimerSenhaTimer(Sender: TObject);
+procedure TdmMain.TimerSenhaTimer(Sender: TObject);
 var
    SenhaDoDia,
    iDia,

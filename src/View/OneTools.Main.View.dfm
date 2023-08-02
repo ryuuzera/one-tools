@@ -34,8 +34,6 @@ object frmMain: TfrmMain
     ParentBackground = False
     ShowCaption = False
     TabOrder = 0
-    ExplicitWidth = 884
-    ExplicitHeight = 551
     object SplitView: TSplitView
       Left = 0
       Top = 0
@@ -48,7 +46,6 @@ object frmMain: TfrmMain
       Padding.Right = 1
       Placement = svpLeft
       TabOrder = 0
-      ExplicitHeight = 551
       object pnSplitView: TPanel
         Left = 0
         Top = 0
@@ -61,7 +58,6 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 0
-        ExplicitHeight = 551
         object pnMenuLogoBackground: TPanel
           Left = 0
           Top = 0
@@ -226,7 +222,6 @@ object frmMain: TfrmMain
           ParentBackground = False
           ShowCaption = False
           TabOrder = 1
-          ExplicitHeight = 461
           object pnMenuCenter: TPanel
             Left = 0
             Top = 0
@@ -239,11 +234,10 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitHeight = 460
             object pnSQLIdent: TPanel
               Tag = 20
               Left = 0
-              Top = 0
+              Top = 33
               Width = 199
               Height = 33
               Align = alTop
@@ -269,20 +263,11 @@ object frmMain: TfrmMain
                 ParentFont = False
                 OnClick = pnSQLIdentClick
               end
-              object Nav: TShape
-                Left = 0
-                Top = 0
-                Width = 4
-                Height = 33
-                Align = alLeft
-                Brush.Color = 5470703
-                Pen.Style = psClear
-              end
             end
             object pnStringDebug: TPanel
               Tag = 20
               Left = 0
-              Top = 33
+              Top = 66
               Width = 199
               Height = 33
               Align = alTop
@@ -312,7 +297,7 @@ object frmMain: TfrmMain
             object Panel1: TPanel
               Tag = 20
               Left = 0
-              Top = 66
+              Top = 99
               Width = 199
               Height = 33
               Align = alTop
@@ -342,7 +327,7 @@ object frmMain: TfrmMain
             object pnCriptoXML: TPanel
               Tag = 20
               Left = 0
-              Top = 99
+              Top = 132
               Width = 199
               Height = 33
               Align = alTop
@@ -353,13 +338,15 @@ object frmMain: TfrmMain
               ShowCaption = False
               TabOrder = 3
               OnClick = pnCriptoXMLClick
+              ExplicitLeft = -1
+              ExplicitTop = 131
               object lbCriptoXML: TLabel
                 Tag = 20
                 Left = 26
                 Top = 6
-                Width = 101
+                Width = 71
                 Height = 17
-                Caption = 'Criptografia XML'
+                Caption = 'Criptografia'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = 13487051
                 Font.Height = -13
@@ -372,7 +359,7 @@ object frmMain: TfrmMain
             object pnVisualizarJSON: TPanel
               Tag = 20
               Left = 0
-              Top = 132
+              Top = 165
               Width = 199
               Height = 33
               Align = alTop
@@ -399,6 +386,138 @@ object frmMain: TfrmMain
                 OnClick = pnVisualizarJSONClick
               end
             end
+            object Panel30: TPanel
+              Tag = 20
+              Left = 0
+              Top = 198
+              Width = 199
+              Height = 33
+              Align = alTop
+              BevelOuter = bvNone
+              Caption = 'pnSQLIdent'
+              Color = 2630180
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 5
+              Visible = False
+              OnClick = Panel30Click
+              object Label15: TLabel
+                Tag = 20
+                Left = 26
+                Top = 5
+                Width = 29
+                Height = 17
+                Caption = 'REST'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = []
+                ParentFont = False
+                OnClick = pnVisualizarJSONClick
+              end
+            end
+            object Panel31: TPanel
+              Tag = 20
+              Left = 0
+              Top = 264
+              Width = 199
+              Height = 33
+              Align = alTop
+              BevelOuter = bvNone
+              Caption = 'pnSQLIdent'
+              Color = 2630180
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 6
+              Visible = False
+              OnClick = Panel31Click
+              object Label16: TLabel
+                Tag = 20
+                Left = 26
+                Top = 5
+                Width = 123
+                Height = 17
+                Caption = 'Desvincular Produto'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = []
+                ParentFont = False
+                OnClick = Panel31Click
+              end
+            end
+            object pnBackupRestore: TPanel
+              Tag = 20
+              Left = 0
+              Top = 0
+              Width = 199
+              Height = 33
+              Align = alTop
+              BevelOuter = bvNone
+              Color = 2630180
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 7
+              OnClick = pnBackupRestoreClick
+              object Label17: TLabel
+                Tag = 20
+                Left = 26
+                Top = 5
+                Width = 161
+                Height = 17
+                Caption = 'Backup / Restore (Firebird)'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = []
+                ParentFont = False
+                OnClick = pnBackupRestoreClick
+              end
+              object Nav: TShape
+                Left = 0
+                Top = 0
+                Width = 4
+                Height = 33
+                Align = alLeft
+                Brush.Color = 5470703
+                Pen.Style = psClear
+                ExplicitLeft = 8
+              end
+            end
+            object pnNodeModules: TPanel
+              Tag = 20
+              Left = 0
+              Top = 231
+              Width = 199
+              Height = 33
+              Align = alTop
+              BevelOuter = bvNone
+              Color = 2630180
+              ParentBackground = False
+              ShowCaption = False
+              TabOrder = 8
+              OnClick = pnNodeModulesClick
+              ExplicitLeft = 2
+              ExplicitTop = 230
+              object Label20: TLabel
+                Tag = 20
+                Left = 26
+                Top = 5
+                Width = 134
+                Height = 17
+                Caption = 'Limpar Node Modules'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = 13487051
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = []
+                ParentFont = False
+                OnClick = pnNodeModulesClick
+              end
+            end
           end
         end
         object pnMenuBottomBackground: TPanel
@@ -413,7 +532,6 @@ object frmMain: TfrmMain
           ParentBackground = False
           ShowCaption = False
           TabOrder = 2
-          ExplicitTop = 510
           object pnMenuBottom: TPanel
             Left = 0
             Top = 0
@@ -506,23 +624,545 @@ object frmMain: TfrmMain
       ParentBackground = False
       ShowCaption = False
       TabOrder = 1
-      ExplicitWidth = 684
-      ExplicitHeight = 551
       object PageControl1: TPageControl
         Left = 0
         Top = 0
         Width = 682
         Height = 523
-        ActivePage = TabSheet4
+        ActivePage = TabSheet10
         Align = alClient
         Style = tsFlatButtons
         TabOrder = 0
-        ExplicitWidth = 684
-        ExplicitHeight = 510
+        object TabSheet10: TTabSheet
+          Caption = 'TabSheet10'
+          ImageIndex = 7
+          object Panel40: TPanel
+            Left = 0
+            Top = 0
+            Width = 674
+            Height = 49
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            object Label21: TLabel
+              AlignWithMargins = True
+              Left = 20
+              Top = 13
+              Width = 144
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Backup / Restore'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+          end
+          object Panel42: TPanel
+            Left = 0
+            Top = 49
+            Width = 674
+            Height = 443
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 1
+            object Panel43: TPanel
+              AlignWithMargins = True
+              Left = 15
+              Top = 171
+              Width = 644
+              Height = 272
+              Margins.Left = 15
+              Margins.Top = 0
+              Margins.Right = 15
+              Margins.Bottom = 0
+              Align = alBottom
+              BevelOuter = bvNone
+              Caption = 'Panel8'
+              Color = 4998722
+              Padding.Left = 1
+              Padding.Top = 1
+              Padding.Right = 1
+              Padding.Bottom = 1
+              ParentBackground = False
+              TabOrder = 0
+              object BackupRestoreProgress: TRichEdit
+                Left = 1
+                Top = 1
+                Width = 642
+                Height = 270
+                Margins.Left = 1
+                Margins.Top = 1
+                Margins.Right = 1
+                Margins.Bottom = 1
+                Align = alClient
+                BevelInner = bvNone
+                BevelOuter = bvNone
+                BorderStyle = bsNone
+                Color = 2959396
+                Font.Charset = ANSI_CHARSET
+                Font.Color = 13487051
+                Font.Height = -12
+                Font.Name = 'Consolas'
+                Font.Style = []
+                ParentFont = False
+                ScrollBars = ssBoth
+                TabOrder = 0
+                Zoom = 100
+                ExplicitHeight = 249
+              end
+            end
+            object pgBackupRestore: TPageControl
+              AlignWithMargins = True
+              Left = 3
+              Top = 41
+              Width = 668
+              Height = 125
+              Margins.Bottom = 5
+              ActivePage = TabSheet11
+              Align = alClient
+              Style = tsFlatButtons
+              TabOrder = 1
+              ExplicitHeight = 146
+              object TabSheet11: TTabSheet
+                Caption = 'TabSheet11'
+                ExplicitHeight = 115
+                DesignSize = (
+                  660
+                  94)
+                object Shape4: TShape
+                  Left = 9
+                  Top = 30
+                  Width = 288
+                  Height = 25
+                  Anchors = [akTop, akRight]
+                  Brush.Color = 5655365
+                  Pen.Color = 5655365
+                  Shape = stRoundRect
+                end
+                object Label22: TLabel
+                  AlignWithMargins = True
+                  Left = 10
+                  Top = 10
+                  Width = 102
+                  Height = 17
+                  Margins.Left = 10
+                  Anchors = [akTop, akRight]
+                  Caption = 'Banco de Origem'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  Layout = tlCenter
+                end
+                object Shape5: TShape
+                  Left = 9
+                  Top = 82
+                  Width = 288
+                  Height = 25
+                  Anchors = [akTop, akRight]
+                  Brush.Color = 5655365
+                  Pen.Color = 5655365
+                  Shape = stRoundRect
+                end
+                object Label23: TLabel
+                  AlignWithMargins = True
+                  Left = 10
+                  Top = 62
+                  Width = 127
+                  Height = 17
+                  Margins.Left = 10
+                  Anchors = [akTop, akRight]
+                  Caption = 'Caminho para Backup'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  Layout = tlCenter
+                end
+                object Image4: TImage
+                  Left = 303
+                  Top = 30
+                  Width = 25
+                  Height = 25
+                  Cursor = crHandPoint
+                  Center = True
+                  Picture.Data = {
+                    0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+                    00180806000000E0773DF80000000473424954080808087C0864880000000970
+                    48597300000EC400000EC401952B0E1B0000001974455874536F667477617265
+                    007777772E696E6B73636170652E6F72679BEE3C1A000002204944415478DADD
+                    95316814411486DFDBBD141A2426BB4A0A032608A2040B0553241B1342407B63
+                    29B78744446D551423D14245B052636136878208C1D6E210C9B987318282A9B4
+                    501B4151778B4441B3BBF3FC2FE10E2FE271DE788DAF98D97D33FBBE7FDE9B99
+                    656AB071C30132BAAB298C9B0749A996DF460DF3BDE5E567B50081DB9743375C
+                    65CE796BCA3FA7017094108FA558DD5D3D98284E23896794C8D0866C61A65E80
+                    30D39136CFBFB97A504646CCB0F9E32340BA58E45AD548062B26C9B57A859735
+                    038A161C1AD8442AB987C7ED55014226DA54CA883B5A2667C39A01B5DA67D7D9
+                    69103D17837AEC49FFD97F0C08DCFE0E24F4027CDD7F0310A2B568B621E42B66
+                    F926226F14CB5805009338749D39CCDF889D932361A9192094C2373B7035CCE3
+                    3586670FFAA50A4098E9DD27623C40DC61DB2B3CD44919E25E85DE03158020ED
+                    E4A1620D4EEE6E9DE00BA3037614256F91A6EB65004EC90B563407C07ECBF3EF
+                    EB00BEB8CE65A4EA6814275D65000AB45711755B5FDBB7F2F47452B7FA834356
+                    642EBD43D01BB6F7F8D4328098C751A5B3183F8CF4DCD2529FE9BF846BE55851
+                    7DFB9D279F5600244F5190CD0B6276766667BE6BAB279AB0A7FC93455F690531
+                    2EAAD328F4152DF5E9BE8BCC7CBCA4BE0C40BE7E9864F630458BF5066F125E8F
+                    A5E751CB092BEB9F28F939C83805387B7594FF628B50BFA5A47E1950BCF38375
+                    1F06B1455B75A3E38FF0BAEDB63F5FE1FB47CAFF0C6D34E027C5CE154890EB81
+                    F40000000049454E44AE426082}
+                  OnClick = Image4Click
+                end
+                object Image5: TImage
+                  Left = 303
+                  Top = 81
+                  Width = 25
+                  Height = 25
+                  Cursor = crHandPoint
+                  Center = True
+                  Picture.Data = {
+                    0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+                    00180806000000E0773DF80000000473424954080808087C0864880000000970
+                    48597300000EC400000EC401952B0E1B0000001974455874536F667477617265
+                    007777772E696E6B73636170652E6F72679BEE3C1A000002204944415478DADD
+                    95316814411486DFDBBD141A2426BB4A0A032608A2040B0553241B1342407B63
+                    29B78744446D551423D14245B052636136878208C1D6E210C9B987318282A9B4
+                    501B4151778B4441B3BBF3FC2FE10E2FE271DE788DAF98D97D33FBBE7FDE9B99
+                    656AB071C30132BAAB298C9B0749A996DF460DF3BDE5E567B50081DB9743375C
+                    65CE796BCA3FA7017094108FA558DD5D3D98284E23896794C8D0866C61A65E80
+                    30D39136CFBFB97A504646CCB0F9E32340BA58E45AD548062B26C9B57A859735
+                    038A161C1AD8442AB987C7ED55014226DA54CA883B5A2667C39A01B5DA67D7D9
+                    69103D17837AEC49FFD97F0C08DCFE0E24F4027CDD7F0310A2B568B621E42B66
+                    F926226F14CB5805009338749D39CCDF889D932361A9192094C2373B7035CCE3
+                    3586670FFAA50A4098E9DD27623C40DC61DB2B3CD44919E25E85DE03158020ED
+                    E4A1620D4EEE6E9DE00BA3037614256F91A6EB65004EC90B563407C07ECBF3EF
+                    EB00BEB8CE65A4EA6814275D65000AB45711755B5FDBB7F2F47452B7FA834356
+                    642EBD43D01BB6F7F8D4328098C751A5B3183F8CF4DCD2529FE9BF846BE55851
+                    7DFB9D279F5600244F5190CD0B6276766667BE6BAB279AB0A7FC93455F690531
+                    2EAAD328F4152DF5E9BE8BCC7CBCA4BE0C40BE7E9864F630458BF5066F125E8F
+                    A5E751CB092BEB9F28F939C83805387B7594FF628B50BFA5A47E1950BCF38375
+                    1F06B1455B75A3E38FF0BAEDB63F5FE1FB47CAFF0C6D34E027C5CE154890EB81
+                    F40000000049454E44AE426082}
+                  OnClick = Image5Click
+                end
+                object edArquivoOrigem: TEdit
+                  Left = 13
+                  Top = 33
+                  Width = 276
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  BorderStyle = bsNone
+                  Color = 5655365
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 0
+                end
+                object Panel44: TPanel
+                  Tag = 22
+                  Left = 343
+                  Top = 80
+                  Width = 114
+                  Height = 27
+                  Anchors = [akTop, akRight]
+                  BevelOuter = bvNone
+                  Caption = 'Gerar'
+                  Color = 5926637
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWhite
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI Semibold'
+                  Font.Style = []
+                  ParentBackground = False
+                  ParentFont = False
+                  TabOrder = 1
+                  OnClick = Panel44Click
+                end
+                object edArquivoBackup: TEdit
+                  Left = 13
+                  Top = 85
+                  Width = 276
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  BorderStyle = bsNone
+                  Color = 5655365
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 2
+                end
+              end
+              object TabSheet12: TTabSheet
+                Caption = 'TabSheet12'
+                ImageIndex = 1
+                ExplicitHeight = 115
+                DesignSize = (
+                  660
+                  94)
+                object Shape6: TShape
+                  Left = 9
+                  Top = 30
+                  Width = 288
+                  Height = 25
+                  Anchors = [akTop, akRight]
+                  Brush.Color = 5655365
+                  Pen.Color = 5655365
+                  Shape = stRoundRect
+                end
+                object Image6: TImage
+                  Left = 303
+                  Top = 30
+                  Width = 25
+                  Height = 25
+                  Cursor = crHandPoint
+                  Center = True
+                  Picture.Data = {
+                    0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+                    00180806000000E0773DF80000000473424954080808087C0864880000000970
+                    48597300000EC400000EC401952B0E1B0000001974455874536F667477617265
+                    007777772E696E6B73636170652E6F72679BEE3C1A000002204944415478DADD
+                    95316814411486DFDBBD141A2426BB4A0A032608A2040B0553241B1342407B63
+                    29B78744446D551423D14245B052636136878208C1D6E210C9B987318282A9B4
+                    501B4151778B4441B3BBF3FC2FE10E2FE271DE788DAF98D97D33FBBE7FDE9B99
+                    656AB071C30132BAAB298C9B0749A996DF460DF3BDE5E567B50081DB9743375C
+                    65CE796BCA3FA7017094108FA558DD5D3D98284E23896794C8D0866C61A65E80
+                    30D39136CFBFB97A504646CCB0F9E32340BA58E45AD548062B26C9B57A859735
+                    038A161C1AD8442AB987C7ED55014226DA54CA883B5A2667C39A01B5DA67D7D9
+                    69103D17837AEC49FFD97F0C08DCFE0E24F4027CDD7F0310A2B568B621E42B66
+                    F926226F14CB5805009338749D39CCDF889D932361A9192094C2373B7035CCE3
+                    3586670FFAA50A4098E9DD27623C40DC61DB2B3CD44919E25E85DE03158020ED
+                    E4A1620D4EEE6E9DE00BA3037614256F91A6EB65004EC90B563407C07ECBF3EF
+                    EB00BEB8CE65A4EA6814275D65000AB45711755B5FDBB7F2F47452B7FA834356
+                    642EBD43D01BB6F7F8D4328098C751A5B3183F8CF4DCD2529FE9BF846BE55851
+                    7DFB9D279F5600244F5190CD0B6276766667BE6BAB279AB0A7FC93455F690531
+                    2EAAD328F4152DF5E9BE8BCC7CBCA4BE0C40BE7E9864F630458BF5066F125E8F
+                    A5E751CB092BEB9F28F939C83805387B7594FF628B50BFA5A47E1950BCF38375
+                    1F06B1455B75A3E38FF0BAEDB63F5FE1FB47CAFF0C6D34E027C5CE154890EB81
+                    F40000000049454E44AE426082}
+                  OnClick = Image6Click
+                end
+                object Label24: TLabel
+                  AlignWithMargins = True
+                  Left = 10
+                  Top = 10
+                  Width = 109
+                  Height = 17
+                  Margins.Left = 10
+                  Anchors = [akTop, akRight]
+                  Caption = 'Arquivo de Backup'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  Layout = tlCenter
+                end
+                object Label25: TLabel
+                  AlignWithMargins = True
+                  Left = 10
+                  Top = 62
+                  Width = 146
+                  Height = 17
+                  Margins.Left = 10
+                  Anchors = [akTop, akRight]
+                  Caption = 'Caminho da Restaura'#231#227'o'
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  Layout = tlCenter
+                end
+                object Shape7: TShape
+                  Left = 9
+                  Top = 82
+                  Width = 288
+                  Height = 25
+                  Anchors = [akTop, akRight]
+                  Brush.Color = 5655365
+                  Pen.Color = 5655365
+                  Shape = stRoundRect
+                end
+                object Image7: TImage
+                  Left = 303
+                  Top = 81
+                  Width = 25
+                  Height = 25
+                  Cursor = crHandPoint
+                  Center = True
+                  Picture.Data = {
+                    0954506E67496D61676589504E470D0A1A0A0000000D49484452000000180000
+                    00180806000000E0773DF80000000473424954080808087C0864880000000970
+                    48597300000EC400000EC401952B0E1B0000001974455874536F667477617265
+                    007777772E696E6B73636170652E6F72679BEE3C1A000002204944415478DADD
+                    95316814411486DFDBBD141A2426BB4A0A032608A2040B0553241B1342407B63
+                    29B78744446D551423D14245B052636136878208C1D6E210C9B987318282A9B4
+                    501B4151778B4441B3BBF3FC2FE10E2FE271DE788DAF98D97D33FBBE7FDE9B99
+                    656AB071C30132BAAB298C9B0749A996DF460DF3BDE5E567B50081DB9743375C
+                    65CE796BCA3FA7017094108FA558DD5D3D98284E23896794C8D0866C61A65E80
+                    30D39136CFBFB97A504646CCB0F9E32340BA58E45AD548062B26C9B57A859735
+                    038A161C1AD8442AB987C7ED55014226DA54CA883B5A2667C39A01B5DA67D7D9
+                    69103D17837AEC49FFD97F0C08DCFE0E24F4027CDD7F0310A2B568B621E42B66
+                    F926226F14CB5805009338749D39CCDF889D932361A9192094C2373B7035CCE3
+                    3586670FFAA50A4098E9DD27623C40DC61DB2B3CD44919E25E85DE03158020ED
+                    E4A1620D4EEE6E9DE00BA3037614256F91A6EB65004EC90B563407C07ECBF3EF
+                    EB00BEB8CE65A4EA6814275D65000AB45711755B5FDBB7F2F47452B7FA834356
+                    642EBD43D01BB6F7F8D4328098C751A5B3183F8CF4DCD2529FE9BF846BE55851
+                    7DFB9D279F5600244F5190CD0B6276766667BE6BAB279AB0A7FC93455F690531
+                    2EAAD328F4152DF5E9BE8BCC7CBCA4BE0C40BE7E9864F630458BF5066F125E8F
+                    A5E751CB092BEB9F28F939C83805387B7594FF628B50BFA5A47E1950BCF38375
+                    1F06B1455B75A3E38FF0BAEDB63F5FE1FB47CAFF0C6D34E027C5CE154890EB81
+                    F40000000049454E44AE426082}
+                  OnClick = Image7Click
+                end
+                object edArquivoBackupOrigem: TEdit
+                  Left = 14
+                  Top = 33
+                  Width = 276
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  BorderStyle = bsNone
+                  Color = 5655365
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 0
+                end
+                object edArquivoRestaurado: TEdit
+                  Left = 13
+                  Top = 85
+                  Width = 276
+                  Height = 21
+                  Anchors = [akTop, akRight]
+                  BevelInner = bvNone
+                  BevelOuter = bvNone
+                  BorderStyle = bsNone
+                  Color = 5655365
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = 13487051
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = []
+                  ParentFont = False
+                  TabOrder = 1
+                end
+                object Panel39: TPanel
+                  Tag = 22
+                  Left = 343
+                  Top = 80
+                  Width = 114
+                  Height = 27
+                  Anchors = [akTop, akRight]
+                  BevelOuter = bvNone
+                  Caption = 'Gerar'
+                  Color = 5926637
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWhite
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI Semibold'
+                  Font.Style = []
+                  ParentBackground = False
+                  ParentFont = False
+                  TabOrder = 2
+                  OnClick = Panel39Click
+                end
+              end
+            end
+            object Panel41: TPanel
+              Left = 0
+              Top = 0
+              Width = 674
+              Height = 38
+              Align = alTop
+              BevelOuter = bvNone
+              Caption = 'Panel41'
+              ShowCaption = False
+              TabOrder = 2
+              object Panel45: TPanel
+                Left = 164
+                Top = 0
+                Width = 164
+                Height = 38
+                Cursor = crHandPoint
+                Align = alLeft
+                BevelOuter = bvNone
+                Caption = 'Restore'
+                DragCursor = crHandPoint
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 0
+                OnClick = Panel45Click
+              end
+              object Panel46: TPanel
+                Left = 0
+                Top = 0
+                Width = 164
+                Height = 38
+                Cursor = crHandPoint
+                Align = alLeft
+                BevelOuter = bvNone
+                Caption = 'Backup'
+                DragCursor = crHandPoint
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWhite
+                Font.Height = -13
+                Font.Name = 'Segoe UI Semibold'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 1
+                OnClick = Panel46Click
+                object navBackup: TShape
+                  Left = 0
+                  Top = 34
+                  Width = 164
+                  Height = 4
+                  Align = alBottom
+                  Brush.Color = 5926637
+                  Pen.Style = psClear
+                  ExplicitLeft = 1
+                  ExplicitTop = 31
+                end
+              end
+            end
+          end
+        end
         object TabSheet1: TTabSheet
           Caption = 'TabSheet1'
-          ExplicitWidth = 676
-          ExplicitHeight = 479
           object Panel2: TPanel
             Left = 0
             Top = 453
@@ -535,8 +1175,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitTop = 440
-            ExplicitWidth = 676
             DesignSize = (
               674
               39)
@@ -599,14 +1237,13 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitWidth = 676
             DesignSize = (
               674
               49)
             object Label8: TLabel
               AlignWithMargins = True
-              Left = 16
-              Top = 13
+              Left = 20
+              Top = 18
               Width = 201
               Height = 25
               Margins.Left = 10
@@ -638,7 +1275,6 @@ object frmMain: TfrmMain
               ParentFont = False
               TabOrder = 0
               OnClick = pnIndentarClick
-              ExplicitLeft = 574
             end
           end
           object Panel10: TPanel
@@ -653,8 +1289,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitWidth = 676
-            ExplicitHeight = 391
             object Panel11: TPanel
               AlignWithMargins = True
               Left = 15
@@ -675,8 +1309,6 @@ object frmMain: TfrmMain
               Padding.Bottom = 1
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 646
-              ExplicitHeight = 391
               object reIndentarAuto: TRichEdit
                 Left = 1
                 Top = 1
@@ -700,8 +1332,6 @@ object frmMain: TfrmMain
                 ScrollBars = ssBoth
                 TabOrder = 0
                 Zoom = 100
-                ExplicitWidth = 644
-                ExplicitHeight = 389
               end
             end
           end
@@ -709,8 +1339,6 @@ object frmMain: TfrmMain
         object TabSheet2: TTabSheet
           Caption = 'TabSheet2'
           ImageIndex = 1
-          ExplicitWidth = 676
-          ExplicitHeight = 479
           object Panel4: TPanel
             Left = 0
             Top = 49
@@ -723,8 +1351,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitWidth = 676
-            ExplicitHeight = 391
             object Panel12: TPanel
               AlignWithMargins = True
               Left = 15
@@ -745,8 +1371,6 @@ object frmMain: TfrmMain
               Padding.Bottom = 1
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 646
-              ExplicitHeight = 391
               object reDebugString: TRichEdit
                 Left = 1
                 Top = 1
@@ -770,8 +1394,6 @@ object frmMain: TfrmMain
                 ScrollBars = ssBoth
                 TabOrder = 0
                 Zoom = 100
-                ExplicitWidth = 644
-                ExplicitHeight = 389
               end
             end
           end
@@ -787,7 +1409,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitWidth = 676
             DesignSize = (
               674
               49)
@@ -826,7 +1447,6 @@ object frmMain: TfrmMain
               ParentFont = False
               TabOrder = 0
               OnClick = pnConverterDebugClick
-              ExplicitLeft = 574
             end
           end
           object Panel15: TPanel
@@ -841,16 +1461,11 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitLeft = 104
-            ExplicitTop = 461
-            ExplicitWidth = 676
           end
         end
         object TabSheet3: TTabSheet
           Caption = 'TabSheet3'
           ImageIndex = 2
-          ExplicitWidth = 676
-          ExplicitHeight = 479
           object Panel5: TPanel
             Left = 0
             Top = 453
@@ -863,8 +1478,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitTop = 440
-            ExplicitWidth = 676
             DesignSize = (
               674
               39)
@@ -961,7 +1574,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitWidth = 676
             DesignSize = (
               674
               49)
@@ -1027,7 +1639,6 @@ object frmMain: TfrmMain
               Font.Style = []
               ParentFont = False
               TabOrder = 0
-              ExplicitLeft = 425
             end
             object pnGerarSQLDelphi: TPanel
               Tag = 22
@@ -1048,7 +1659,6 @@ object frmMain: TfrmMain
               ParentFont = False
               TabOrder = 1
               OnClick = pnGerarSQLDelphiClick
-              ExplicitLeft = 574
             end
           end
           object Panel7: TPanel
@@ -1063,8 +1673,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitWidth = 676
-            ExplicitHeight = 391
             object Panel8: TPanel
               AlignWithMargins = True
               Left = 15
@@ -1085,8 +1693,6 @@ object frmMain: TfrmMain
               Padding.Bottom = 1
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 646
-              ExplicitHeight = 391
               object reSQLtoDelphi: TRichEdit
                 Left = 1
                 Top = 1
@@ -1110,8 +1716,6 @@ object frmMain: TfrmMain
                 ScrollBars = ssBoth
                 TabOrder = 0
                 Zoom = 100
-                ExplicitWidth = 644
-                ExplicitHeight = 389
               end
             end
           end
@@ -1119,8 +1723,6 @@ object frmMain: TfrmMain
         object TabSheet4: TTabSheet
           Caption = 'TabSheet4'
           ImageIndex = 3
-          ExplicitWidth = 676
-          ExplicitHeight = 479
           object Panel14: TPanel
             Left = 0
             Top = 0
@@ -1133,7 +1735,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitWidth = 676
             DesignSize = (
               674
               49)
@@ -1141,10 +1742,10 @@ object frmMain: TfrmMain
               AlignWithMargins = True
               Left = 16
               Top = 13
-              Width = 173
+              Width = 108
               Height = 25
               Margins.Left = 10
-              Caption = 'Criptografia de XML'
+              Caption = 'Criptografia '
               Font.Charset = ANSI_CHARSET
               Font.Color = 13487051
               Font.Height = -19
@@ -1172,7 +1773,6 @@ object frmMain: TfrmMain
               ParentFont = False
               TabOrder = 0
               OnClick = pnCriptografarClick
-              ExplicitLeft = 559
             end
             object pnDescriptografar: TPanel
               Tag = 22
@@ -1193,7 +1793,6 @@ object frmMain: TfrmMain
               ParentFont = False
               TabOrder = 1
               OnClick = pnDescriptografarClick
-              ExplicitLeft = 455
             end
           end
           object Panel17: TPanel
@@ -1208,8 +1807,33 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitTop = 440
-            ExplicitWidth = 676
+            object Edit2: TEdit
+              Left = 15
+              Top = 16
+              Width = 450
+              Height = 21
+              BorderStyle = bsNone
+              Color = 2959396
+              TabOrder = 0
+            end
+            object Button1: TButton
+              Left = 482
+              Top = 12
+              Width = 88
+              Height = 25
+              Caption = 'descritografar'
+              TabOrder = 1
+              OnClick = Button1Click
+            end
+            object Button2: TButton
+              Left = 576
+              Top = 12
+              Width = 75
+              Height = 25
+              Caption = 'criptografar'
+              TabOrder = 2
+              OnClick = Button2Click
+            end
           end
           object Panel18: TPanel
             Left = 0
@@ -1223,8 +1847,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 2
-            ExplicitWidth = 676
-            ExplicitHeight = 391
             object Panel19: TPanel
               AlignWithMargins = True
               Left = 15
@@ -1245,8 +1867,6 @@ object frmMain: TfrmMain
               Padding.Bottom = 1
               ParentBackground = False
               TabOrder = 0
-              ExplicitWidth = 646
-              ExplicitHeight = 391
               object reCriptografia: TRichEdit
                 Left = 1
                 Top = 1
@@ -1270,8 +1890,6 @@ object frmMain: TfrmMain
                 ScrollBars = ssBoth
                 TabOrder = 0
                 Zoom = 100
-                ExplicitWidth = 644
-                ExplicitHeight = 389
               end
             end
           end
@@ -1279,8 +1897,6 @@ object frmMain: TfrmMain
         object TabSheet5: TTabSheet
           Caption = 'TabSheet5'
           ImageIndex = 4
-          ExplicitWidth = 676
-          ExplicitHeight = 479
           object Panel16: TPanel
             Left = 0
             Top = 49
@@ -1293,8 +1909,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 0
-            ExplicitWidth = 676
-            ExplicitHeight = 391
             object Panel20: TPanel
               AlignWithMargins = True
               Left = 15
@@ -1315,10 +1929,6 @@ object frmMain: TfrmMain
               Padding.Bottom = 1
               ParentBackground = False
               TabOrder = 0
-              ExplicitLeft = 14
-              ExplicitTop = -3
-              ExplicitWidth = 646
-              ExplicitHeight = 391
               object PC_JSON: TPageControl
                 Left = 1
                 Top = 42
@@ -1438,9 +2048,6 @@ object frmMain: TfrmMain
                 Caption = 'Panel21'
                 ShowCaption = False
                 TabOrder = 1
-                ExplicitLeft = 232
-                ExplicitTop = 192
-                ExplicitWidth = 185
                 object pnJSONVisualizacao: TPanel
                   Tag = 22
                   Left = 0
@@ -1494,7 +2101,6 @@ object frmMain: TfrmMain
             ParentBackground = False
             ShowCaption = False
             TabOrder = 1
-            ExplicitWidth = 676
             object Label12: TLabel
               AlignWithMargins = True
               Left = 16
@@ -1503,6 +2109,406 @@ object frmMain: TfrmMain
               Height = 25
               Margins.Left = 10
               Caption = 'Visualizar JSON'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+          end
+        end
+        object TabSheet8: TTabSheet
+          Caption = 'TabSheet8'
+          ImageIndex = 5
+          object Panel23: TPanel
+            Left = 0
+            Top = 41
+            Width = 674
+            Height = 410
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel23'
+            TabOrder = 0
+            object Panel28: TPanel
+              Left = 339
+              Top = 0
+              Width = 335
+              Height = 410
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'Panel23'
+              ShowCaption = False
+              TabOrder = 0
+            end
+            object Panel29: TPanel
+              Left = 0
+              Top = 0
+              Width = 339
+              Height = 410
+              Align = alLeft
+              BevelOuter = bvNone
+              Caption = 'Panel23'
+              ShowCaption = False
+              TabOrder = 1
+            end
+          end
+          object Panel24: TPanel
+            Left = 0
+            Top = 0
+            Width = 674
+            Height = 41
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel23'
+            ShowCaption = False
+            TabOrder = 1
+            DesignSize = (
+              674
+              41)
+            object Shape3: TShape
+              Left = 200
+              Top = 9
+              Width = 347
+              Height = 27
+              Pen.Color = 4998722
+            end
+            object Image3: TImage
+              Left = 120
+              Top = 10
+              Width = 25
+              Height = 25
+              Center = True
+              Picture.Data = {
+                0954506E67496D61676589504E470D0A1A0A0000000D49484452000000100000
+                001010060000004F6323220000000467414D410000B18F0BFC61050000000662
+                4B4744000000000000F943BB7F0000000970485973000000600000006000F06B
+                42CF0000000774494D4507E607131002220735F648000002244944415478DAED
+                953D6B145114869F89F3B146D7D8C4D242103F7E408A44103F10B58845B448AB
+                A8A0F80312344634DA06020A6A6F639A1814442382F851D868A756690392808A
+                BBB3D9F13D6767A329C24E64ECBCC3F2CE9D3B73CFB3F73DE7DE80822DE334BB
+                A84AB79030AD271B893920ED96428340D71C8BA4840CB18D6BBCE45BC77983E2
+                00E7D8CD45693711A3FAD000CE3A40E2005D7A768F9F7AA3C984502FF386DBE5
+                012C739E3D8C7BE090FD0A37C9475F8156AB73937E5E50D39B99FE7B952B0218
+                FF0FD01920E38464AB7E4D3671461F47F2B457FD988ABF122BA435F37C9F6BA8
+                445B0B2015009AA3EE33BE92367DBC2BD748110216D4AB69EC3E4193A39A70CE
+                872AECF080099FF33E7F80B4B23D502F62463AC907A6560052255E3F973469A6
+                DEA0ABDDD572DDA090B6DCA1EB4EA9817E69035811850A705C3ACB0F9E167566
+                DD6D89AB023DA2153180C76D80548123010C4A1F09E0C93F03F8CA18031C5334
+                B364A60D309B2F799F6BCCBC6BCBFB24B7A0925B60FBC0746EC1AD55160C30A2
+                2537EF8756BC4FA5997FD7B220F2DE76070878674978CA13CBDCAA329C03F4AE
+                CA01DB6832DF700E3B48A86BED24B4C00DF71E9E39C8B227A1E581CDD6D0C802
+                3DDA25331E945986375423C339C02755D4986AE07DC7794B03F8DB561A4083EB
+                B2E020DFBDD0E6B5C423BC5599950650EC30BAABC3C8926EC277C2D7DC2913E0
+                027BD92C8D954C0FB1C44D38C4EFE3D8009EEB38AE6B0D4E163E8E7F01FAAECE
+                741CDE1FFC0000002574455874646174653A63726561746500323032322D3037
+                2D31395431363A30323A33342B30303A303071F02CC200000025744558746461
+                74653A6D6F6469667900323032322D30372D31395431363A30323A33342B3030
+                3A303000AD947E0000002874455874646174653A74696D657374616D70003230
+                32322D30372D31395431363A30323A33342B30303A303057B8B5A10000000049
+                454E44AE426082}
+            end
+            object Edit1: TEdit
+              Left = 201
+              Top = 10
+              Width = 345
+              Height = 25
+              BevelInner = bvNone
+              BevelOuter = bvNone
+              BorderStyle = bsNone
+              Color = 3617069
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -15
+              Font.Name = 'Segoe UI '
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+            end
+            object Enviar: TPanel
+              Tag = 22
+              Left = 570
+              Top = 8
+              Width = 87
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Enviar'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 1
+            end
+            object ComboBox1: TComboBox
+              Left = 13
+              Top = 13
+              Width = 101
+              Height = 21
+              Color = 2170138
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -11
+              Font.Name = 'Segoe UI'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 2
+              Text = 'ComboBox1'
+            end
+          end
+          object Panel27: TPanel
+            Left = 0
+            Top = 451
+            Width = 674
+            Height = 41
+            Align = alBottom
+            BevelOuter = bvNone
+            Caption = 'Panel27'
+            ShowCaption = False
+            TabOrder = 2
+          end
+        end
+        object TabSheet9: TTabSheet
+          Caption = 'TabSheet9'
+          ImageIndex = 6
+          object Panel32: TPanel
+            Left = 0
+            Top = 49
+            Width = 674
+            Height = 404
+            Align = alClient
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 0
+            DesignSize = (
+              674
+              404)
+            object Label18: TLabel
+              AlignWithMargins = True
+              Left = 20
+              Top = 165
+              Width = 111
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Encontrados:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -19
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object lbStatus: TLabel
+              AlignWithMargins = True
+              Left = 21
+              Top = 129
+              Width = 3
+              Height = 15
+              Margins.Left = 10
+              Font.Charset = ANSI_CHARSET
+              Font.Color = 13487051
+              Font.Height = -12
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentFont = False
+              Layout = tlCenter
+            end
+            object Panel36: TPanel
+              Tag = 22
+              Left = 388
+              Top = 2
+              Width = 101
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Adicionar '
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = adicionarDiretorioLista
+            end
+            object valueList: TValueListEditor
+              Left = 20
+              Top = 0
+              Width = 333
+              Height = 106
+              BorderStyle = bsNone
+              Color = 3617069
+              DrawingStyle = gdsGradient
+              FixedColor = 3617069
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 13487051
+              Font.Height = -11
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              GradientEndColor = 5655365
+              GradientStartColor = 4734777
+              Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goRowSelect, goThumbTracking]
+              ParentFont = False
+              ParentShowHint = False
+              ScrollBars = ssVertical
+              ShowHint = False
+              TabOrder = 1
+              TitleCaptions.Strings = (
+                'Diret'#243'rio'
+                'Caminho')
+              ColWidths = (
+                70
+                261)
+            end
+            object Panel33: TPanel
+              Tag = 22
+              Left = 495
+              Top = 2
+              Width = 114
+              Height = 27
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Remover'
+              Color = 3842037
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 2
+              OnClick = Panel33Click
+            end
+            object Panel37: TPanel
+              Tag = 22
+              Left = 388
+              Top = 35
+              Width = 221
+              Height = 29
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Buscar'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 3
+              OnClick = Panel37Click
+            end
+            object DBGrid1: TDBGrid
+              Left = 20
+              Top = 196
+              Width = 589
+              Height = 203
+              BorderStyle = bsNone
+              Color = 3617069
+              DataSource = dsNode
+              DrawingStyle = gdsGradient
+              GradientEndColor = 5655365
+              GradientStartColor = 5655365
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 14737118
+              Font.Height = -11
+              Font.Name = 'Segoe UI '
+              Font.Style = []
+              Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick]
+              ParentFont = False
+              TabOrder = 4
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = 13487051
+              TitleFont.Height = -11
+              TitleFont.Name = 'Segoe UI Semibold'
+              TitleFont.Style = []
+              OnCellClick = DBGrid1CellClick
+              OnDrawColumnCell = DBGrid1DrawColumnCell
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'check'
+                  Title.Caption = 'Selec.'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'caminho'
+                  Title.Caption = 'Caminho'
+                  Width = 530
+                  Visible = True
+                end>
+            end
+          end
+          object Panel34: TPanel
+            Left = 0
+            Top = 453
+            Width = 674
+            Height = 39
+            Align = alBottom
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 1
+            DesignSize = (
+              674
+              39)
+            object Panel38: TPanel
+              Tag = 22
+              Left = 388
+              Top = 6
+              Width = 221
+              Height = 29
+              Anchors = [akTop, akRight]
+              BevelOuter = bvNone
+              Caption = 'Excluir Selecionados'
+              Color = 5926637
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWhite
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = []
+              ParentBackground = False
+              ParentFont = False
+              TabOrder = 0
+              OnClick = Panel38Click
+            end
+          end
+          object Panel35: TPanel
+            Left = 0
+            Top = 0
+            Width = 674
+            Height = 49
+            Align = alTop
+            BevelOuter = bvNone
+            Caption = 'Panel2'
+            Color = 2170138
+            ParentBackground = False
+            ShowCaption = False
+            TabOrder = 2
+            object Label19: TLabel
+              AlignWithMargins = True
+              Left = 20
+              Top = 18
+              Width = 188
+              Height = 25
+              Margins.Left = 10
+              Caption = 'Limpar node_modules'
               Font.Charset = ANSI_CHARSET
               Font.Color = 13487051
               Font.Height = -19
@@ -1525,8 +2531,6 @@ object frmMain: TfrmMain
         ParentBackground = False
         ShowCaption = False
         TabOrder = 1
-        ExplicitTop = 510
-        ExplicitWidth = 684
         DesignSize = (
           682
           41)
@@ -1626,7 +2630,6 @@ object frmMain: TfrmMain
     ShowCaption = False
     TabOrder = 1
     OnMouseDown = pnTopMouseDown
-    ExplicitWidth = 884
     object imgMenu: TImage
       Tag = 10
       Left = 0
@@ -1667,7 +2670,6 @@ object frmMain: TfrmMain
       ParentBackground = False
       ShowCaption = False
       TabOrder = 0
-      ExplicitLeft = 846
       object imgClose: TImage
         Tag = 21
         Left = 0
@@ -1723,7 +2725,6 @@ object frmMain: TfrmMain
       ParentBackground = False
       ShowCaption = False
       TabOrder = 1
-      ExplicitLeft = 770
       object imgMinimize: TImage
         Tag = 21
         Left = 0
@@ -1763,7 +2764,6 @@ object frmMain: TfrmMain
       ParentBackground = False
       ShowCaption = False
       TabOrder = 2
-      ExplicitLeft = 808
       object imgMaximize: TImage
         Tag = 21
         Left = 0
@@ -1813,5 +2813,64 @@ object frmMain: TfrmMain
       OnMouseEnter = PNEventsMouseEnter
       OnMouseLeave = PNEventsMouseLeave
     end
+  end
+  object dsNode: TDataSource
+    DataSet = cdsNode
+    Left = 749
+    Top = 254
+  end
+  object cdsNode: TClientDataSet
+    PersistDataPacket.Data = {
+      440000009619E0BD010000001800000002000000000003000000440005636865
+      636B02000300000000000763616D696E686F0200490000000100055749445448
+      02000200F4010000}
+    Active = True
+    Aggregates = <>
+    FieldDefs = <
+      item
+        Name = 'check'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'caminho'
+        DataType = ftString
+        Size = 500
+      end>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 789
+    Top = 246
+    object cdsNodecheck: TBooleanField
+      FieldName = 'check'
+      OnGetText = cdsNodecheckGetText
+    end
+    object cdsNodecaminho: TStringField
+      FieldName = 'caminho'
+      Size = 500
+    end
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    Left = 773
+    Top = 118
+  end
+  object IBRestore: TFDIBRestore
+    BeforeExecute = IBRestoreBeforeExecute
+    AfterExecute = IBRestoreAfterExecute
+    DriverLink = FDPhysFBDriverLink1
+    OnProgress = IBRestoreProgress
+    Verbose = True
+    Left = 813
+    Top = 118
+  end
+  object IBBackup: TFDIBBackup
+    BeforeExecute = IBBackupBeforeExecute
+    AfterExecute = IBBackupAfterExecute
+    DriverLink = FDPhysFBDriverLink1
+    Protocol = ipTCPIP
+    OnProgress = IBBackupProgress
+    Verbose = True
+    Left = 725
+    Top = 126
   end
 end

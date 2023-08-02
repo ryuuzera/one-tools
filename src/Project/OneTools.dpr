@@ -22,9 +22,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TdmMain, dmMain);
-  Application.CreateForm(TfrmBase1, frmBase1);
-  Application.CreateForm(TMessageBox, MessageBox);
+  Application.CreateForm(TfrmMain, frmMain);
   Application.Run;
 end.

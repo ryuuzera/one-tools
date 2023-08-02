@@ -7,9 +7,14 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Math, Vcl.ExtCtrls, Vcl.WinXCtrls, Vcl.StdCtrls,
   OneTools.Helpers.Panel.Controller, OneTools.Styles.Constants.View,
   Vcl.Imaging.pngimage, Vcl.ComCtrls, ShellAPI, OneTools.DialogBox.View,
-  JSONTreeView, JSONDoc;
+  JSONTreeView, JSONDoc, REST.Client, EncdDecd, Data.DB, Datasnap.DBClient, Vcl.DBGrids,
+  Vcl.Samples.Gauges, Vcl.Grids, Vcl.ValEdit, System.IOUtils, System.Types, FireDAC.Phys.FBDef,
+  FireDAC.Stan.Def, FireDAC.VCLUI.Wait, FireDAC.Phys.IBWrapper, FireDAC.Phys.IBBase, FireDAC.Phys,
+  FireDAC.Stan.Intf, FireDAC.Phys.FB, System.Threading;
+
 
 type
+
   TfrmMain = class(TForm)
     pnBody: TPanel;
     pnTop: TPanel;
@@ -39,7 +44,6 @@ type
     lbIdentSQL: TLabel;
     Label1: TLabel;
     Label2: TLabel;
-    Nav: TShape;
     pnBodyCenter: TPanel;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -112,6 +116,81 @@ type
     Panel21: TPanel;
     pnJSONVisualizacao: TPanel;
     pnJSONText: TPanel;
+    TabSheet8: TTabSheet;
+    Panel23: TPanel;
+    Panel24: TPanel;
+    Panel27: TPanel;
+    Panel28: TPanel;
+    Panel29: TPanel;
+    Edit1: TEdit;
+    Shape3: TShape;
+    Enviar: TPanel;
+    Panel30: TPanel;
+    Label15: TLabel;
+    Image3: TImage;
+    ComboBox1: TComboBox;
+    Panel31: TPanel;
+    Label16: TLabel;
+    Edit2: TEdit;
+    Button1: TButton;
+    Button2: TButton;
+    pnBackupRestore: TPanel;
+    Label17: TLabel;
+    TabSheet9: TTabSheet;
+    Panel32: TPanel;
+    Panel34: TPanel;
+    Panel35: TPanel;
+    Label19: TLabel;
+    Panel36: TPanel;
+    valueList: TValueListEditor;
+    Panel33: TPanel;
+    Panel37: TPanel;
+    DBGrid1: TDBGrid;
+    Label18: TLabel;
+    dsNode: TDataSource;
+    cdsNode: TClientDataSet;
+    Panel38: TPanel;
+    cdsNodecheck: TBooleanField;
+    cdsNodecaminho: TStringField;
+    lbStatus: TLabel;
+    pnNodeModules: TPanel;
+    Label20: TLabel;
+    TabSheet10: TTabSheet;
+    Panel40: TPanel;
+    Label21: TLabel;
+    Panel42: TPanel;
+    Panel43: TPanel;
+    BackupRestoreProgress
+    : TRichEdit;
+    pgBackupRestore: TPageControl;
+    TabSheet11: TTabSheet;
+    TabSheet12: TTabSheet;
+    Panel41: TPanel;
+    Panel45: TPanel;
+    Panel46: TPanel;
+    navBackup: TShape;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    IBRestore: TFDIBRestore;
+    IBBackup: TFDIBBackup;
+    edArquivoOrigem: TEdit;
+    Shape4: TShape;
+    Label22: TLabel;
+    Panel44: TPanel;
+    edArquivoBackup: TEdit;
+    Shape5: TShape;
+    Label23: TLabel;
+    Image4: TImage;
+    Image5: TImage;
+    edArquivoBackupOrigem: TEdit;
+    Shape6: TShape;
+    Image6: TImage;
+    Label24: TLabel;
+    Label25: TLabel;
+    edArquivoRestaurado: TEdit;
+    Shape7: TShape;
+    Image7: TImage;
+    Panel39: TPanel;
+    Nav: TShape;
     procedure pnTopMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
       Y: Integer);
     procedure imgCloseClick(Sender: TObject);
@@ -135,17 +214,51 @@ type
     procedure pnJSONTextClick(Sender: TObject);
     procedure pnVisualizarJSONClick(Sender: TObject);
     procedure pnJSONVisualizacaoClick(Sender: TObject);
+    procedure Panel30Click(Sender: TObject);
+    procedure Panel31Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure adicionarDiretorioLista(Sender: TObject);
+    procedure pnNodeModulesClick(Sender: TObject);
+    procedure Panel33Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
+      Column: TColumn; State: TGridDrawState);
+    procedure Panel37Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
+    procedure cdsNodecheckGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+    procedure Panel38Click(Sender: TObject);
+    procedure Panel46Click(Sender: TObject);
+    procedure Panel45Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure pnBackupRestoreClick(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
+    procedure Panel44Click(Sender: TObject);
+    procedure IBBackupProgress(ASender: TFDPhysDriverService; const AMessage: string);
+    procedure IBBackupBeforeExecute(Sender: TObject);
+    procedure IBBackupAfterExecute(Sender: TObject);
+    procedure Panel39Click(Sender: TObject);
+    procedure Image6Click(Sender: TObject);
+    procedure Image7Click(Sender: TObject);
+    procedure IBRestoreAfterExecute(Sender: TObject);
+    procedure IBRestoreBeforeExecute(Sender: TObject);
+    procedure IBRestoreProgress(ASender: TFDPhysDriverService; const AMessage: string);
   private
      { Private declarations }
+    FRestClient: TRestClient;
+    FBackupThread: TThread;
+    FRestoreThread: TThread;
     function GetBorderSpace: Integer;
     function IsBorderless: Boolean;
     procedure WMNCCalcSize(var Msg: TWMNCCalcSize); message WM_NCCALCSIZE;
+    function BuscaDiretorios(const Dir, TargetDir: string): TArray<string>;
+    procedure EnableAfterThread(Sender: TObject);
     { Private declarations }
   protected
     procedure Paint; override;
     procedure Resize; override;
   public
     { Public declarations }
+    constructor OnCreate(AOwner: TComponent); reintroduce;
   end;
 
 var
@@ -158,14 +271,89 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmMain.Button2Click(Sender: TObject);
+begin
+   with TMainController.Create do
+      try
+         Edit2.Text := EncodeString(Criptografar(FormatDateTime('dd/mm/yyyy', StrToDate(Edit2.Text))));
+      finally
+         Free;
+      end;
+end;
+
+procedure TfrmMain.cdsNodecheckGetText(Sender: TField; var Text: string; DisplayText: Boolean);
+begin
+   Text := EmptyStr;
+end;
+
+procedure TfrmMain.DBGrid1CellClick(Column: TColumn);
+begin
+
+  if Column.FieldName = 'check' then
+  begin
+      DBGrid1.DataSource.Dataset.Edit;
+
+     if (DBGrid1.DataSource.Dataset.FieldByName('check').AsBoolean) then
+        DBGrid1.DataSource.Dataset.FieldByName('check').AsBoolean := False
+     else
+        DBGrid1.DataSource.Dataset.FieldByName('check').AsBoolean := True;
+
+     DBGrid1.DataSource.Dataset.Post;
+  end;
+
+end;
+
+procedure TfrmMain.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer;
+  Column: TColumn; State: TGridDrawState);
+var
+  Check: Integer;
+  R: TRect;
+begin
+  inherited;
+
+  if ((Sender as TDBGrid).DataSource.Dataset.IsEmpty) then
+    Exit;
+
+  if Column.FieldName = 'check' then
+  begin
+    TDBGrid(Sender).Canvas.FillRect(Rect);
+    (Sender as TDBGrid).DataSource.Dataset.Edit;
+    if ((Sender as TDBGrid).DataSource.Dataset.FieldByName('check').AsBoolean) then
+    begin
+      Check := DFCS_CHECKED
+    end
+    else
+    begin
+      Check := 0;
+    end;
+
+    R := Rect;
+    InflateRect(R, -2, -2); { Diminue o tamanho do CheckBox }
+    DrawFrameControl(TDBGrid(Sender).Canvas.Handle, R, DFC_BUTTON,
+      DFCS_BUTTONCHECK or Check);
+  end;
+end;
+
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
+   SetWindowRgn(ComboBox1.Handle, CreateRectRgn(2,2,ComboBox1.Width - 2,
+               ComboBox1.Height - 2), True);
    with TMainController.Create do
    try
       OnCreate(Self);
    finally
       Free;
    end;
+end;
+
+procedure TfrmMain.Button1Click(Sender: TObject);
+begin
+   with TMainController.Create do
+      try
+         Edit2.Text := DateToStr(StrToDate(Descriptografar(DecodeString(Edit2.Text)))) ;
+      finally
+         Free;
+      end;
 end;
 
 function TfrmMain.GetBorderSpace: Integer;
@@ -180,6 +368,89 @@ begin
                    GetSystemMetrics(SM_CXPADDEDBORDER);
      else
       Result := 0;
+   end;
+end;
+
+procedure TfrmMain.IBBackupAfterExecute(Sender: TObject);
+begin
+   TThread.Synchronize(TThread(FBackupThread), procedure
+   begin
+      MessageShow('Backup concluído com sucesso!', mtInformation, [mbok]);
+   end);
+end;
+
+procedure TfrmMain.IBBackupBeforeExecute(Sender: TObject);
+begin
+   TThread.Synchronize(TThread(FBackupThread), procedure
+   begin
+      Panel44.Enabled := False;
+      Panel44.Visible := False;
+      BackupRestoreProgress.Lines.Clear;
+   end);
+end;
+
+procedure TfrmMain.IBBackupProgress(ASender: TFDPhysDriverService; const AMessage: string);
+begin
+   TThread.Synchronize(TThread(FBackupThread), procedure
+   begin
+      SendMessage(BackupRestoreProgress.handle, WM_VSCROLL, SB_BOTTOM, 0);
+      BackupRestoreProgress.Lines.Add(AMessage);
+   end);
+end;
+
+procedure TfrmMain.Image4Click(Sender: TObject);
+begin
+   with TOpenDialog.Create(nil) do
+   begin
+      Title := 'Selecione o Banco de dados de origem';
+      Filter := 'Banco de Dados Firebird (*.FDB)|*.FDB';
+      DefaultExt := 'FDB';
+      FilterIndex := 1;
+      if Execute then
+         edArquivoOrigem.Text := Filename;
+      Free;
+   end;
+end;
+
+procedure TfrmMain.Image5Click(Sender: TObject);
+begin
+   with TSaveDialog.Create(nil) do
+   begin
+      Title := 'Selecione o Local do Backup';
+      Filter := 'Arquivo de Backup Firebird (*.fbk)|*.fbk';
+      DefaultExt := 'fbk';
+      FilterIndex := 1;
+      if Execute then
+         edArquivoBackup.Text := Filename;
+      Free;
+   end;
+end;
+
+procedure TfrmMain.Image6Click(Sender: TObject);
+begin
+   with TOpenDialog.Create(nil) do
+   begin
+      Title := 'Selecione o Arquivo de origem';
+      Filter := 'Arquivo de Backup Firebird (*.fbk)|*.fbk';
+      DefaultExt := 'fbk';
+      FilterIndex := 1;
+      if Execute then
+         edArquivoBackupOrigem.Text := Filename;
+      Free;
+   end;
+end;
+
+procedure TfrmMain.Image7Click(Sender: TObject);
+begin
+   with TSaveDialog.Create(nil) do
+   begin
+      Title := 'Selecione o Local de Restauração';
+      Filter := 'Banco de Dados Firebird (*.FDB)|*.FDB';
+      DefaultExt := 'FDB';
+      FilterIndex := 1;
+      if Execute then
+         edArquivoRestaurado.Text := Filename;
+      Free;
    end;
 end;
 
@@ -226,6 +497,12 @@ begin
    ShellExecute(0, 'Open', PChar('https://github.com/ryuuzera/one-tools'), PChar(''), nil, SW_SHOWNORMAL);
 end;
 
+constructor TfrmMain.OnCreate(AOwner: TComponent);
+begin
+   inherited Create(AOwner);
+   FRestClient := dmMain.RESTClient;
+end;
+
 procedure TfrmMain.PNEventsMouseEnter(Sender: TObject);
 begin
   SetMouseMove(Sender);
@@ -249,7 +526,189 @@ end;
 
 procedure TfrmMain.Panel1Click(Sender: TObject);
 begin
-   ControlaNav(Nav, Sender, PageControl1, 2);
+   ControlaNav(Nav, Sender, PageControl1, 3);
+end;
+
+procedure TfrmMain.Panel30Click(Sender: TObject);
+begin
+   ControlaNav(Nav, Sender, PageControl1, 6);
+end;
+
+procedure TfrmMain.Panel31Click(Sender: TObject);
+begin
+   ControlaNav(Nav, Sender, PageControl1, 6);
+end;
+
+procedure TfrmMain.Panel33Click(Sender: TObject);
+begin
+   if (valueList.Strings.Count > 0) then
+      valueList.deleterow(valueList.Row)
+   else
+      MessageShow('Nenhum diretório adicionado!', mtInformation, [mbOK]);
+end;
+
+function TfrmMain.BuscaDiretorios(const Dir, TargetDir: string): TArray<string>;
+var
+  Directories: TArray<string>;                                
+  DirPath: string;
+  SubDirectories: TArray<string>;
+  SubDirPath: string;
+begin
+   Result := nil;
+   Directories := TDirectory.GetDirectories(Dir);
+   for DirPath in Directories do
+   begin
+      try
+         lbStatus.Caption := Format('Buscando em: %s',[DirPath]);
+         if Pos(TargetDir, DirPath) > 0 then
+         begin
+            SetLength(Result, Length(Result) + 1);
+            Result[High(Result)] := DirPath;
+            cdsNode.Append;
+            cdsNode.FieldByName('check').AsBoolean := True;
+            cdsNode.FieldByName('caminho').AsString := Result[High(Result)];
+            cdsNode.Post;
+         end
+         else
+         begin
+            SubDirectories := BuscaDiretorios(DirPath, TargetDir);
+            for SubDirPath in SubDirectories do
+            begin
+               SetLength(Result, Length(Result) + 1);
+               Result[High(Result)] := SubDirPath;
+            end;
+         end;   
+      finally
+         Application.ProcessMessages;
+      end;
+   end;
+end;
+
+procedure TfrmMain.Panel37Click(Sender: TObject);
+var
+   NodeModules: TArray<String>;
+   I: Integer;
+  K: Integer;
+begin
+   if (valueList.Strings.Count = 0) then
+   begin
+      MessageShow('Adicione pelo menos um diretório!', mtInformation, [mbOK]);
+      Abort;
+   end;
+   cdsNode.EmptyDataSet;
+   cdsNode.Open;
+   for I := 0 to valueList.Strings.Count -1 do
+   begin
+      buscaDiretorios(valueList.Strings.ValueFromIndex[i], 'node_modules');
+   end;
+   lbStatus.Caption := 'Finalizado!';
+
+end;
+
+procedure TfrmMain.Panel38Click(Sender: TObject);
+
+   procedure Remove(const Dir: string);
+   var
+     ShOp: TSHFileOpStruct;
+     TotalFiles: Integer;
+   begin
+     ZeroMemory(@ShOp, SizeOf(ShOp));
+     ShOp.Wnd := Self.Handle;
+     ShOp.wFunc := FO_DELETE;
+     ShOp.pFrom := PChar(Dir + #0);
+     ShOp.pTo := nil;
+     ShOp.fFlags := FOF_SIMPLEPROGRESS or FOF_NOCONFIRMATION or FOF_NOERRORUI or FOF_NOCONFIRMMKDIR;
+     ShOp.lpszProgressTitle := PChar('Excluindo arquivos...');
+     SHFileOperation(ShOp);
+   end;
+
+begin
+   if cdsNode.IsEmpty then
+   begin
+      MessageShow('Nenhum diretório de node_modules selecionado!', mtInformation, [mbOK]);
+      Abort;
+   end;
+   cdsNode.First;
+   while not cdsNode.eof do
+   begin
+      try
+         if (cdsNode.FieldByName('check').AsBoolean) then
+         begin
+            Remove(cdsNode.FieldByName('caminho').AsString);
+            cdsNode.Delete;
+         end;
+          cdsNode.Next;
+      except
+         MessageShow(Format('Erro ao tentar excluir o diretório %s', [cdsNode.FieldByName('caminho').AsString]), mtInformation, [mbOK]);
+      end;
+   end;
+end;
+
+procedure TfrmMain.Panel39Click(Sender: TObject);
+begin
+   if (String(edArquivoBackupOrigem.Text).IsEmpty) or (String(edArquivoRestaurado.Text).IsEmpty) then
+   begin
+      MessageShow('Obrigatório informar o arquivo de origem e diretório de destino!', mtInformation, [mbOK]);
+      Abort;
+   end;
+
+   try
+      IBRestore.BackupFiles.Clear;
+      IBRestore.Host     := '127.0.0.1';
+      IBRestore.Password := 'masterkey';
+      IBRestore.Port     := 3050;
+      IBRestore.UserName := 'SYSDBA';
+      IBRestore.Protocol := ipTCPIP;
+      IBRestore.Database := edArquivoRestaurado.Text; //edArquivoRestaurado.Text
+      IBRestore.BackupFiles.Add(edArquivoBackupOrigem.Text);
+
+      FRestoreThread := TThread.CreateAnonymousThread(procedure
+      begin
+         try
+             IBRestore.Restore;
+         except on E:exception do
+            begin
+               FRestoreThread.Terminate;
+               TThread.Synchronize(nil,
+                  procedure
+                  begin
+                     // Notifica o thread principal sobre a exceção
+                      Panel39.Visible := True;
+                      Panel39.Enabled := True;
+                      MessageShow(Format('Ocorreu o seguinte erro ao tentar efetuar a restauração: %s', [e.Message]), mtInformation, [mbOK]);
+                  end
+               );
+            end;
+         end;
+      end
+      );
+      FRestoreThread.FreeOnTerminate := True;
+      FRestoreThread.OnTerminate := EnableAfterThread;
+      FRestoreThread.Start;
+
+   except
+
+   end;
+end;
+
+procedure TfrmMain.adicionarDiretorioLista(Sender: TObject);
+
+   function getIndex: integer;
+   begin
+      Exit(valueList.Strings.Count + 1)
+   end;
+
+begin
+   with TFileOpenDialog.Create(nil) do
+   begin
+      Options := [fdoPickFolders];
+      Title := 'Selecione um diretório';
+      if Execute then
+      begin
+         valueList.InsertRow(getIndex.ToString(), FileName, true);
+      end;
+      Free;
+   end
 end;
 
 procedure TfrmMain.pnJSONTextClick(Sender: TObject);
@@ -268,16 +727,28 @@ begin
    pnJSONText.BevelOuter := bvNone;
 end;
 
+procedure TfrmMain.pnNodeModulesClick(Sender: TObject);
+begin
+   ControlaNav(Nav, Sender, PageControl1, 7);
+end;
+
 procedure TfrmMain.pnVisualizarJSONClick(Sender: TObject);
 begin
-   ControlaNav(Nav, Sender, PageControl1, 4);
+   ControlaNav(Nav, Sender, PageControl1, 5);
+end;
+
+procedure TfrmMain.pnBackupRestoreClick(Sender: TObject);
+begin
+   ControlaNav(Nav, Sender, PageControl1, 0);
 end;
 
 procedure TfrmMain.pnConverterDebugClick(Sender: TObject);
 begin
    with TMainController.Create do
    try
+//      reDebugString.Lines.Text := DebugString(reDebugString.Lines.Text);
       DebugarString(reDebugString);
+      HighlightSQLKeywords(reDebugString);
    finally
       Free;
    end;
@@ -303,7 +774,7 @@ end;
 
 procedure TfrmMain.pnCriptoXMLClick(Sender: TObject);
 begin
-   ControlaNav(Nav, Sender, PageControl1, 3);
+   ControlaNav(Nav, Sender, PageControl1, 4);
 end;
 
 procedure TfrmMain.pnDescriptografarClick(Sender: TObject);
@@ -350,12 +821,12 @@ end;
 
 procedure TfrmMain.pnSQLIdentClick(Sender: TObject);
 begin
-  ControlaNav(Nav, Sender, PageControl1, 0);
+  ControlaNav(Nav, Sender, PageControl1, 1);
 end;
 
 procedure TfrmMain.pnStringDebugClick(Sender: TObject);
 begin
-  ControlaNav(Nav, Sender, PageControl1, 1);
+  ControlaNav(Nav, Sender, PageControl1, 2);
 end;
 
 procedure TfrmMain.pnTopMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
@@ -382,6 +853,101 @@ begin
    if WindowState = wsNormal then
      Inc(CaptionBarHeight, GetBorderSpace);
    Dec(Msg.CalcSize_Params.rgrc[0].Top, CaptionBarHeight);
+end;
+
+procedure TfrmMain.Panel44Click(Sender: TObject);
+begin
+   if (String(edArquivoOrigem.Text).IsEmpty) or (String(edArquivoBackup.Text).IsEmpty) then
+   begin
+      MessageShow('Obrigatório informar o arquivo de origem e diretório de destino!', mtInformation, [mbOK]);
+      Abort;
+   end;
+
+   try
+      IBBackup.BackupFiles.Clear;
+      IBBackup.Host     := '127.0.0.1';
+      IBBackup.Password := 'masterkey';
+      IBBackup.Port     := 3050;
+      IBBackup.UserName := 'SYSDBA';
+      IBBackup.Protocol := ipTCPIP;
+      IBBackup.Database := edArquivoOrigem.Text;
+      IBBackup.BackupFiles.Add(edArquivoBackup.Text);
+
+       FBackupThread := TThread.CreateAnonymousThread(procedure
+      begin
+         try
+             IBBackup.Backup;
+         except on E:exception do
+            begin
+               FBackupThread.Terminate;
+               TThread.Synchronize(nil,
+                  procedure
+                  begin
+                     // Notifica o thread principal sobre a exceção
+                      Panel39.Visible := True;
+                      Panel39.Enabled := True;
+                      MessageShow(Format('Ocorreu o seguinte erro ao tentar efetuar o backup: %s', [e.Message]), mtInformation, [mbOK]);
+                  end
+               );
+            end;
+         end;
+
+      end
+      );
+
+      FBackupThread.FreeOnTerminate := True;
+      FBackupThread.OnTerminate := EnableAfterThread;
+      FBackupThread.Start;
+   except on E:exception do
+      begin
+
+      end;
+   end;
+end;
+
+procedure TFrmMain.EnableAfterThread(Sender: TObject);
+begin
+   Panel44.Enabled := True;
+   Panel44.Visible := True;
+   Panel39.Enabled := True;
+   Panel39.Visible := True;
+end;
+
+procedure TfrmMain.Panel45Click(Sender: TObject);
+begin
+   ControlaNav(navBackup, Sender, pgBackupRestore, 1);
+end;
+
+procedure TfrmMain.Panel46Click(Sender: TObject);
+begin
+   ControlaNav(navBackup, Sender, pgBackupRestore, 0);
+end;
+
+procedure TfrmMain.IBRestoreAfterExecute(Sender: TObject);
+begin
+   TThread.Synchronize(TThread(FRestoreThread), procedure
+   begin
+      MessageShow('Restauração concluída com sucesso!', mtInformation, [mbok]);
+   end);
+end;
+
+procedure TfrmMain.IBRestoreBeforeExecute(Sender: TObject);
+begin
+   TThread.Synchronize(TThread(FRestoreThread), procedure
+   begin
+      Panel39.Enabled := False;
+      Panel39.Visible := False;
+      BackupRestoreProgress.Lines.Clear;
+   end);
+end;
+
+procedure TfrmMain.IBRestoreProgress(ASender: TFDPhysDriverService; const AMessage: string);
+begin
+   TThread.Synchronize(TThread(FRestoreThread), procedure
+   begin
+      SendMessage(BackupRestoreProgress.handle, WM_VSCROLL, SB_BOTTOM, 0);
+      BackupRestoreProgress.Lines.Add(AMessage);
+   end);
 end;
 
 end.

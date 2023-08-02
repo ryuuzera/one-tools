@@ -114,6 +114,7 @@ begin
   else if mbCancel in Botoes then
   begin
     pnNOCANCEL.Caption := 'Cancelar';
+    pnNOCANCEL.Visible := True;
     FBotaoNoCancel := Cancel;
   end;
 
@@ -160,7 +161,7 @@ end;
 
 function MessageShow(AMensagem: String; ATipo: TTipoDlg; Botoes: TMsgDlgButtons): TModalResult;
 begin
-   TMessageBox.Show(AMensagem, ATipo, Botoes);
+   Result := TMessageBox.Show(AMensagem, ATipo, Botoes).ModalResult;
 end;
 
 end.

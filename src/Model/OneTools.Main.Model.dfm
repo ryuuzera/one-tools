@@ -14,8 +14,24 @@ object dmMain: TdmMain
     Top = 16
   end
   object JSONDocument: TJSONDocument
-    OnChange = JSONDocumentChange
     Left = 24
     Top = 72
+  end
+  object RESTClient: TRESTClient
+    Params = <>
+    Left = 168
+    Top = 17
+  end
+  object RESTRequest: TRESTRequest
+    Client = RESTClient
+    Params = <>
+    Response = RESTResponse
+    SynchronizedEvents = False
+    Left = 237
+    Top = 17
+  end
+  object RESTResponse: TRESTResponse
+    Left = 316
+    Top = 17
   end
 end

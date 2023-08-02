@@ -4,14 +4,20 @@ interface
 
 uses
   Vcl.WinXCtrls, System.Classes, Vcl.Forms, Vcl.ExtCtrls, Vcl.ComCtrls,
-  Vcl.Controls, Vcl.Graphics, OneTools.Main.Model;
+  Vcl.Controls, Vcl.Graphics, OneTools.Main.Model, RegularExpressions, Winapi.Windows;
 
 type
    TMainController = class
     private
+       FRichEdit: TRichEdit;
+       FColor: TColor;
        procedure SetCursor( AForm: TForm);
        procedure SetEvents(AForm: TForm);
        procedure EsconderTabs(PageControl: TPageControl);
+    function ReplaceCC(const Match: TMatch): string;
+    procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes;
+      Color: TColor);
+
     public
        procedure ControlaSplitView(var ASplitView: TSplitView);
        procedure IndentarTexto(RichEdit: TRichEdit; Limit: Integer);
@@ -20,7 +26,10 @@ type
        function Descriptografar(ATexto: String): String;
        procedure OnCreate(AForm: TForm);
        procedure ControlaJSONViewer;
+        function DebugString(const AString: string): string;
+         procedure HighlightSQLKeywords(RichEdit: TRichEdit);
    end;
+
 
 procedure SetMouseMove(Component: TObject);
 procedure SetMouseLeave(Component: TObject);
@@ -28,7 +37,7 @@ procedure ControlaNav(Nav: TShape; Sender: TObject; PageControl: TPageControl; P
 procedure GeraSQLtoDelphi(RE: TRichEdit; AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
       EliminaEspacos: Boolean = False);
 procedure ValidarCampoVazio(Condicao: Boolean; AMensagem: String; AFoco: TWinControl);
-procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
+//procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
 
 
 implementation
@@ -36,7 +45,7 @@ implementation
 uses
   OneTools.Main.View,
   OneTools.Styles.Constants.View, Vcl.StdCtrls, System.SysUtils, Vcl.Dialogs, OneTools.DialogBox.View,
-  OneTools.Privacy.Controller, Winapi.Messages;
+  OneTools.Privacy.Controller, Winapi.Messages, StrUtils;
 
 { TMainController }
 
@@ -102,9 +111,80 @@ begin
 end;
 
 procedure TMainController.DebugarString(RichEdit: TRichEdit);
+var
+   I, Posicao: Integer;
+   linha: string;
 begin
    RichEdit.Lines.Text := StringReplace(RichEdit.Lines.Text, '#$D#$A', sLineBreak, [rfReplaceAll]);
-   RichEdit.Lines.Text := StringReplace(RichEdit.Lines.Text, #39, '', [rfReplaceAll]);
+   RichEdit.Lines.Text := StringReplace(RichEdit.Lines.Text, '''''', '''', [rfReplaceAll]);
+
+   for I := 0 to RichEdit.Lines.Count - 1 do
+    begin
+      linha := TrimLeft(RichEdit.Lines[I]);
+      if Length(linha) > 0 then
+      begin
+        if linha[1] = #39 then
+        begin
+          Posicao := 1;
+          Delete(linha, Posicao, 1);
+        end;
+      end;
+
+      linha := TrimRight(linha);
+      if Length(linha) > 0 then
+      begin
+        if linha[Length(linha)] = #39 then
+        begin
+          Posicao := Length(linha);
+          Delete(linha, Posicao, 1);
+        end;
+      end;
+
+      RichEdit.Lines[I] := linha;
+    end;
+
+end;
+
+procedure TMainController.HighlightSQLKeywords(RichEdit: TRichEdit);
+const
+  SQL_KEYWORDS: array [0..30] of string = ('SELECT', 'FROM', 'WHERE', 'ORDER', 'BY',
+                                           'ASC', 'DESC', 'AND', 'OR', 'NOT',
+                                           'NULL', 'IS', 'LIKE', 'IN', 'BETWEEN',
+                                           'INNER', 'JOIN', 'LEFT', 'OUTER', 'FULL',
+                                           'GROUP', 'HAVING', 'COUNT', 'MAX', 'MIN',
+                                           'SUM', 'AVG', 'AS', 'ON', 'DISTINCT',
+                                           '*');
+var
+  I, J: Integer;
+  Options: TRegExOptions;
+  Line: string;
+begin
+  Options := [roIgnoreCase];
+
+  for I := Low(SQL_KEYWORDS) to High(SQL_KEYWORDS) do
+  begin
+    RichEdit.SelStart := 0;
+    RichEdit.SelLength := 0;
+    Color_Words(RichEdit, SQL_KEYWORDS[I], [stWholeWord], BUTTON_ORANGE);;
+  end;
+end;
+
+function TMainController.DebugString(const AString: string): string;
+var
+  I: Integer;
+  StrAnterior: string;
+begin
+  Result := '';
+  StrAnterior := '';
+  for I := 1 to Length(AString) do
+  begin
+    if (AString[I] <> #10) and (AString[I] <> #13) and (AString[I] <> #9) then
+    begin
+      if (AString[I] <> ' ') or (StrAnterior <> ' ') then
+        Result := Result + AString[I];
+    end;
+    StrAnterior := AString[I];
+  end;
 end;
 
 function TMainController.Descriptografar(ATexto: String): String;
@@ -195,6 +275,7 @@ begin
    begin
       EsconderTabs(FrmMain.PageControl1);
       EsconderTabs(FrmMain.PC_JSON);
+      EsconderTabs(FrmMain.pgBackupRestore);
       frmMain.reJSONView.MaxLength := System.MaxInt-2;
    end;
 end;
@@ -304,7 +385,7 @@ begin
        Nav.Parent := TPanel(TLabel(Sender).Parent);
     TPanel(TLabel(Sender).Parent).Repaint;
   end;
-  PageControl.ActivePage := PageControl.Pages[Page];
+  PageControl.ActivePageIndex := Page;
 end;
 
 procedure GeraSQLtoDelphi(RE: TRichEdit; AComponenteSQL: String; ATexto: TStrings; State: TToggleSwitchState;
@@ -365,19 +446,42 @@ begin
   end;
 end;
 
-procedure Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
-Var
-  FoundAt : integer;
+function TMainController.ReplaceCC(const Match: TMatch): string;
 begin
-  FoundAt := RE.FindText(AWord,0,maxInt,AOptions);
-  while FoundAt <> -1 do
-  begin
-     RE.SelStart := FoundAt;
-     RE.SelLength := Length(AWord);
-     RE.SelAttributes.Color := Color;
-     RE.SelText := AWord;
-     FoundAt:= RE.FindText(AWord,FoundAt + length(AWord),maxInt,AOptions);
-  end;
+   FRichEdit.SelStart := Match.Index;
+    FRichEdit.SelLength := Match.Length;
+    FRichEdit.SelAttributes.Color := FColor;
+    FRichEdit.SelAttributes.Name := 'Segoe UI';
+    FRichEdit.SelAttributes.Style := [fsBold];
+    Result := Match.Value;
 end;
+
+procedure TMainController.Color_Words(RE: TRichEdit; const AWord: string; AOptions: TSearchTypes; Color: TColor);
+var
+  Regex: TRegEx;
+  MatchEvaluator: TMatchEvaluator;
+begin
+  RegEx := TRegEx.Create(Format('\b%s\b', [AWord]), [roIgnoreCase]);
+  FRichEdit := RE;
+  FColor := Color;
+  MatchEvaluator := ReplaceCC;
+  RE.Text := RegEx.Replace(RE.Text, MatchEvaluator);
+  FRichEdit := nil;
+end;
+//var
+//  FoundAt : integer;
+//begin
+//  FoundAt := RE.FindText(AWord,0,maxInt,AOptions);
+//  while FoundAt <> -1 do
+//  begin
+//     RE.SelStart := FoundAt;
+//     RE.SelLength := Length(AWord);
+//     RE.SelAttributes.Color := Color;
+//     RE.SelAttributes.Name := 'Segoe UI';
+//     RE.SelAttributes.Style := [fsBold];
+//     RE.SelText := AWord;
+//     FoundAt:= RE.FindText(AWord,FoundAt + length(AWord),maxInt,AOptions);
+//  end;
+//end;
 
 end.
